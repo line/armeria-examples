@@ -1,0 +1,53 @@
+# Build output
+/build
+/classes
+/out
+/bin
+/tmp
+/*/build
+/*/classes
+/*/out
+/*/bin
+/*/tmp
+**/gen-java
+**/gen-src
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Gradle
+.gradle
+
+# IntelliJ
+.idea
+*.iml
+*.iws
+*.ipr
+*.ids
+
+# VSCode
+.vscode
+
+# Eclipse
+*.pydevproject
+.project
+.metadata
+*~.nib
+.classpath
+.settings
+.loadpath
+.externalToolBuilders
+*.launch
+.cproject
+.buildpath
+
+# ASDF
+.tool-versions
+
+# Miscellaneous
+*.orig
+*.rej
+*.tmp
+*.bak
+*.swp
+*~
