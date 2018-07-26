@@ -1,6 +1,6 @@
 #!/bin/bash -e
 if [[ $# -ne 2 ]]; then
-  echo "Usage: $0 <Armeria version> <Armeria working copy>"
+  echo "Usage: $0 <Armeria version> <Armeria working copy path>"
   exit 1
 fi
 
@@ -9,6 +9,7 @@ SRC_DIR="$(readlink -f "$2")"
 
 if [[ ! -d "$SRC_DIR/.git" ]]; then
   echo "Not a git repository: $SRC_DIR"
+  exit 1
 fi
 cd "$(dirname "$0")"
 
