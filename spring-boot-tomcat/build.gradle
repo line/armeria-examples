@@ -1,0 +1,44 @@
+plugins {
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+    id "org.springframework.boot" version "2.0.3.RELEASE"
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.67.2'
+    }
+}
+
+springBoot {
+    mainClassName = 'example.springframework.boot.tomcat.Main'
+}
+
+dependencies {
+    compile 'com.linecorp.armeria:armeria'
+    compile 'com.linecorp.armeria:armeria-spring-boot-autoconfigure'
+    compile 'com.linecorp.armeria:armeria-tomcat'
+
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    testCompile 'junit:junit'
+    testCompile 'org.assertj:assertj-core'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+tasks.withType(JavaCompile) {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+    options.encoding = 'UTF-8'
+    options.debug = true
+    options.compilerArgs += '-parameters'
+}
+
