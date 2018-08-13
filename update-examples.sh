@@ -4,8 +4,13 @@ if [[ $# -ne 2 ]]; then
   exit 1
 fi
 
+READLINK_PATH="$(which greadlink)"
+if [ -z "$READLINK_PATH" ]; then
+  READLINK_PATH="$(which readlink)"
+fi
+
 VERSION="$1"
-SRC_DIR="$(readlink -f "$2")"
+SRC_DIR="$($READLINK_PATH -f "$2")"
 
 if [[ ! -d "$SRC_DIR/.git" ]]; then
   echo "Not a git repository: $SRC_DIR"

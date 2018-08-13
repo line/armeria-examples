@@ -1,6 +1,5 @@
 plugins {
     id "io.spring.dependency-management" version "1.0.6.RELEASE"
-    id "org.springframework.boot" version "2.0.3.RELEASE"
 }
 
 apply plugin: 'java'
@@ -17,22 +16,12 @@ dependencyManagement {
     }
 }
 
-springBoot {
-    mainClassName = 'example.springframework.boot.tomcat.Main'
-}
-
 dependencies {
     compile 'com.linecorp.armeria:armeria'
-    compile 'com.linecorp.armeria:armeria-spring-boot-autoconfigure'
-    compile 'com.linecorp.armeria:armeria-tomcat'
-
-    compile 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     testCompile 'junit:junit'
+    testCompile 'net.javacrumbs.json-unit:json-unit-fluent'
     testCompile 'org.assertj:assertj-core'
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 tasks.withType(JavaCompile) {
     sourceCompatibility = '1.8'
