@@ -4,9 +4,13 @@ if [[ $# -ne 2 ]]; then
   exit 1
 fi
 
-READLINK_PATH="$(which greadlink)"
-if [ -z "$READLINK_PATH" ]; then
-  READLINK_PATH="$(which readlink)"
+READLINK_PATH="$(which greadlink 2>/dev/null || true)"
+if [[ -z "$READLINK_PATH" ]]; then
+  READLINK_PATH="$(which readlink 2>/dev/null || true)"
+fi
+if [[ -z "$READLINK_PATH" ]]; then
+  echo "Cannot find 'readlink'"
+  exit 1
 fi
 
 VERSION="$1"
@@ -41,17 +45,16 @@ for E in $(find_examples); do
   cp -r "$SRC_DIR/gradle/wrapper" "$E/gradle"
 done
 
-echo 'Patching build.gradle ..'
 for E in $(find_examples); do
+  echo "Patching $E/build.gradle .."
   TMPF="$(mktemp)"
-  cp "$E/build.gradle" "$TMPF"
 
-  # Remove the 'buildscript' section.
-  perl -i -e '
+  # Start with removing the 'buildscript' section.
+  perl -e '
     undef $/; $_=<>;
     s/(^|\n|\s)*buildscript \{(\n|.)*?\n}//;
     print
-  ' "$TMPF"
+  ' < "$E/build.gradle" > "$TMPF"
 
   # Remove the 'apply plugin' statements.
   perl -i -pe 's/^apply plugin:.*$//g' "$TMPF"
@@ -63,21 +66,13 @@ for E in $(find_examples); do
     -pe "s/project\\(':tomcat'\\)/'com.linecorp.armeria:armeria-tomcat'/g;" \
     "$TMPF"
 
-  # Remove the redundant empty lines.
-  perl -i -e '
-    undef $/; $_=<>;
-    s/^(\r?\n)*//;
-    s/(\r?\n)(\r?\n){2,}/\1\1/g;
-    print
-  ' "$TMPF"
-
   {
     # Add the 'plugins' section.
     PLUGINS=('io.spring.dependency-management')
     PLUGIN_VERSIONS=('1.0.6.RELEASE')
     if grep -qF springBoot "$TMPF"; then
       PLUGINS+=('org.springframework.boot')
-      PLUGIN_VERSIONS+=('2.0.3.RELEASE')
+      PLUGIN_VERSIONS+=('2.0.4.RELEASE')
     fi
     echo 'plugins {'
     for ((I=0; I<${#PLUGINS[@]}; I++)); do
@@ -106,9 +101,16 @@ for E in $(find_examples); do
     echo '}'
     echo
 
-    cat "$TMPF"
+    # Paste the patched file while removing the redundant empty lines.
+    perl -e '
+      undef $/; $_=<>;
+      s/^(\r?\n)*//;
+      s/(\r?\n)(\r?\n){2,}/\1\1/g;
+      print
+    ' < "$TMPF"
 
     # Configure the Java compiler.
+    echo
     echo 'tasks.withType(JavaCompile) {'
     echo "    sourceCompatibility = '1.8'"
     echo "    targetCompatibility = '1.8'"
@@ -116,7 +118,6 @@ for E in $(find_examples); do
     echo '    options.debug = true'
     echo "    options.compilerArgs += '-parameters'"
     echo '}'
-    echo
   } > "$E/build.gradle"
 done
 
