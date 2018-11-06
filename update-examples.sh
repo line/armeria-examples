@@ -72,7 +72,7 @@ for E in $(find_examples); do
     PLUGIN_VERSIONS=('1.0.6.RELEASE')
     if grep -qF springBoot "$TMPF"; then
       PLUGINS+=('org.springframework.boot')
-      PLUGIN_VERSIONS+=('2.0.4.RELEASE')
+      PLUGIN_VERSIONS+=('2.1.0.RELEASE')
     fi
     echo 'plugins {'
     for ((I=0; I<${#PLUGINS[@]}; I++)); do
