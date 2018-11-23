@@ -62,7 +62,12 @@ for E in $(find_examples); do
   # Replace the 'project(...)' dependencies.
   perl -i \
     -pe "s/project\\(':core'\\)/'com.linecorp.armeria:armeria'/g;" \
+    -pe "s/project\\(':logback'\\)/'com.linecorp.armeria:armeria-logback'/g;" \
+    -pe "s/project\\(':saml'\\)/'com.linecorp.armeria:armeria-saml'/g;" \
     -pe "s/project\\(':spring:boot-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot-autoconfigure'/g;" \
+    -pe "s/project\\(':spring:boot-starter'\\)/'com.linecorp.armeria:armeria-spring-boot-starter'/g;" \
+    -pe "s/project\\(':spring:boot-webflux-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot-webflux-autoconfigure'/g;" \
+    -pe "s/project\\(':spring:boot-webflux-starter'\\)/'com.linecorp.armeria:armeria-spring-boot-webflux-starter'/g;" \
     -pe "s/project\\(':tomcat'\\)/'com.linecorp.armeria:armeria-tomcat'/g;" \
     "$TMPF"
 
