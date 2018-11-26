@@ -1,4 +1,10 @@
 #!/bin/bash -e
+ASSERTJ_VERSION='3.11.1'
+DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.6.RELEASE'
+JSON_UNIT_VERSION='2.1.1'
+JUNIT_VERSION='4.12'
+SPRING_BOOT_VERSION='2.1.0.RELEASE'
+
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <Armeria version> <Armeria working copy path>"
   exit 1
@@ -71,13 +77,20 @@ for E in $(find_examples); do
     -pe "s/project\\(':tomcat'\\)/'com.linecorp.armeria:armeria-tomcat'/g;" \
     "$TMPF"
 
+  # Append version numbers to the 3rd party dependencies.
+  perl -i \
+    -pe "s/'junit:junit'/'junit:junit:$JUNIT_VERSION'/g;" \
+    -pe "s/'net.javacrumbs.json-unit:json-unit-fluent'/'net.javacrumbs.json-unit:json-unit-fluent:$JSON_UNIT_VERSION'/g;" \
+    -pe "s/'org.assertj:assertj-core'/'org.assertj:assertj-core:$ASSERTJ_VERSION'/g;" \
+    "$TMPF"
+
   {
     # Add the 'plugins' section.
     PLUGINS=('io.spring.dependency-management')
-    PLUGIN_VERSIONS=('1.0.6.RELEASE')
+    PLUGIN_VERSIONS=("$DEPENDENCY_MANAGEMENT_PLUGIN_VERSION")
     if grep -qF springBoot "$TMPF"; then
       PLUGINS+=('org.springframework.boot')
-      PLUGIN_VERSIONS+=('2.1.0.RELEASE')
+      PLUGIN_VERSIONS+=("$SPRING_BOOT_VERSION")
     fi
     echo 'plugins {'
     for ((I=0; I<${#PLUGINS[@]}; I++)); do
