@@ -18,20 +18,16 @@ dependencyManagement {
 }
 
 springBoot {
-    mainClassName = 'example.springframework.boot.tomcat.Main'
+    mainClassName = 'example.springframework.boot.webflux.Main'
 }
 
 dependencies {
-    compile 'com.linecorp.armeria:armeria'
-    compile 'com.linecorp.armeria:armeria-spring-boot-starter'
-    compile 'com.linecorp.armeria:armeria-tomcat'
+    compile 'com.linecorp.armeria:armeria-spring-boot-webflux-starter'
 
-    compile 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'org.assertj:assertj-core:3.11.1'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 

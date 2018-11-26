@@ -17,7 +17,8 @@ dependencyManagement {
 }
 
 dependencies {
-    compile 'com.linecorp.armeria:armeria'
+    compile 'com.linecorp.armeria:armeria-logback'
+    compile 'com.linecorp.armeria:armeria-saml'
 
     testCompile 'junit:junit:4.12'
     testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.1.1'
