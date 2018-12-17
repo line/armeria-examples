@@ -1,9 +1,9 @@
 #!/bin/bash -e
 ASSERTJ_VERSION='3.11.1'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.6.RELEASE'
-JSON_UNIT_VERSION='2.1.1'
+JSON_UNIT_VERSION='2.2.0'
 JUNIT_VERSION='4.12'
-SPRING_BOOT_VERSION='2.1.0.RELEASE'
+SPRING_BOOT_VERSION='2.1.1.RELEASE'
 
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <Armeria version> <Armeria working copy path>"
