@@ -1,5 +1,6 @@
 plugins {
     id "io.spring.dependency-management" version "1.0.6.RELEASE"
+    id "org.springframework.boot" version "2.1.1.RELEASE"
 }
 
 apply plugin: 'java'
@@ -16,13 +17,20 @@ dependencyManagement {
     }
 }
 
+springBoot {
+    mainClassName = 'example.springframework.boot.armeria.Main'
+}
+
 dependencies {
-    compile 'com.linecorp.armeria:armeria-logback'
-    compile 'com.linecorp.armeria:armeria-saml'
+    compile 'com.linecorp.armeria:armeria-spring-boot-starter'
+    compile 'org.hibernate.validator:hibernate-validator'
+
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     testCompile 'junit:junit:4.12'
     testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.2.0'
-    testCompile 'org.assertj:assertj-core:3.11.1'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.withType(JavaCompile) {

@@ -13,7 +13,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.78.2'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.79.0'
     }
 }
 
