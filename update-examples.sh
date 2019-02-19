@@ -1,9 +1,11 @@
 #!/bin/bash -e
-ASSERTJ_VERSION='3.11.1'
+ASSERTJ_VERSION='3.12.0'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.6.RELEASE'
-JSON_UNIT_VERSION='2.2.0'
+IO_PROJECTREACTOR_VERSION='3.2.6.RELEASE'
+JSON_UNIT_VERSION='2.4.0'
 JUNIT_VERSION='4.12'
-SPRING_BOOT_VERSION='2.1.1.RELEASE'
+SLF4J_VERSION='1.7.25'
+SPRING_BOOT_VERSION='2.1.3.RELEASE'
 
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <Armeria version> <Armeria working copy path>"
@@ -82,6 +84,9 @@ for E in $(find_examples); do
     -pe "s/'junit:junit'/'junit:junit:$JUNIT_VERSION'/g;" \
     -pe "s/'net.javacrumbs.json-unit:json-unit-fluent'/'net.javacrumbs.json-unit:json-unit-fluent:$JSON_UNIT_VERSION'/g;" \
     -pe "s/'org.assertj:assertj-core'/'org.assertj:assertj-core:$ASSERTJ_VERSION'/g;" \
+    -pe "s/'org.slf4j:slf4j-simple'/'org.slf4j:slf4j-simple:$SLF4J_VERSION'/g;" \
+    -pe "s/'io.projectreactor:reactor-core'/'io.projectreactor:reactor-core:$IO_PROJECTREACTOR_VERSION'/g;" \
+    -pe "s/'io.projectreactor:reactor-test'/'io.projectreactor:reactor-test:$IO_PROJECTREACTOR_VERSION'/g;" \
     "$TMPF"
 
   {

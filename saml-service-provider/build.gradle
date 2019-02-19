@@ -12,17 +12,18 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.79.0'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.80.0'
     }
 }
 
 dependencies {
     compile 'com.linecorp.armeria:armeria-logback'
     compile 'com.linecorp.armeria:armeria-saml'
+    runtime 'org.slf4j:slf4j-simple:1.7.25'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.2.0'
-    testCompile 'org.assertj:assertj-core:3.11.1'
+    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.4.0'
+    testCompile 'org.assertj:assertj-core:3.12.0'
 }
 
 tasks.withType(JavaCompile) {

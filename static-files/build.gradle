@@ -1,6 +1,5 @@
 plugins {
     id "io.spring.dependency-management" version "1.0.6.RELEASE"
-    id "org.springframework.boot" version "2.1.3.RELEASE"
 }
 
 apply plugin: 'java'
@@ -17,18 +16,13 @@ dependencyManagement {
     }
 }
 
-springBoot {
-    mainClassName = 'example.springframework.boot.webflux.Main'
-}
-
 dependencies {
-    compile 'com.linecorp.armeria:armeria-spring-boot-webflux-starter'
-
-    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    compile 'com.linecorp.armeria:armeria'
+    runtime 'org.slf4j:slf4j-simple:1.7.25'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.4.0'
+    testCompile 'org.assertj:assertj-core:3.12.0'
 }
 
 tasks.withType(JavaCompile) {
