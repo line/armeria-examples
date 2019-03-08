@@ -1,5 +1,5 @@
 plugins {
-    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+    id "io.spring.dependency-management" version "1.0.7.RELEASE"
 }
 
 apply plugin: 'java'
@@ -12,17 +12,17 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.80.0'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.81.0'
     }
 }
 
 dependencies {
     compile 'com.linecorp.armeria:armeria'
-    runtime 'org.slf4j:slf4j-simple:1.7.25'
+    runtime 'org.slf4j:slf4j-simple:1.7.26'
 
     testCompile 'junit:junit:4.12'
     testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.4.0'
-    testCompile 'org.assertj:assertj-core:3.12.0'
+    testCompile 'org.assertj:assertj-core:3.12.1'
 }
 
 tasks.withType(JavaCompile) {

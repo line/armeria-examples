@@ -1,10 +1,10 @@
 #!/bin/bash -e
-ASSERTJ_VERSION='3.12.0'
-DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.6.RELEASE'
+ASSERTJ_VERSION='3.12.1'
+DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.7.RELEASE'
 IO_PROJECTREACTOR_VERSION='3.2.6.RELEASE'
 JSON_UNIT_VERSION='2.4.0'
 JUNIT_VERSION='4.12'
-SLF4J_VERSION='1.7.25'
+SLF4J_VERSION='1.7.26'
 SPRING_BOOT_VERSION='2.1.3.RELEASE'
 
 if [[ $# -ne 2 ]]; then
@@ -72,6 +72,7 @@ for E in $(find_examples); do
     -pe "s/project\\(':core'\\)/'com.linecorp.armeria:armeria'/g;" \
     -pe "s/project\\(':logback'\\)/'com.linecorp.armeria:armeria-logback'/g;" \
     -pe "s/project\\(':saml'\\)/'com.linecorp.armeria:armeria-saml'/g;" \
+    -pe "s/project\\(':spring:boot-actuator-starter'\\)/'com.linecorp.armeria:armeria-spring-boot-actuator-starter'/g;" \
     -pe "s/project\\(':spring:boot-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot-autoconfigure'/g;" \
     -pe "s/project\\(':spring:boot-starter'\\)/'com.linecorp.armeria:armeria-spring-boot-starter'/g;" \
     -pe "s/project\\(':spring:boot-webflux-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot-webflux-autoconfigure'/g;" \
