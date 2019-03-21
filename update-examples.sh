@@ -1,7 +1,9 @@
 #!/bin/bash -e
 ASSERTJ_VERSION='3.12.1'
+AWAITILITY_VERSION='3.1.6'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.7.RELEASE'
 IO_PROJECTREACTOR_VERSION='3.2.6.RELEASE'
+JAKARTA_ANNOTATION_API_VERSION='1.3.4'
 JSON_UNIT_VERSION='2.4.0'
 JUNIT_VERSION='4.12'
 SLF4J_VERSION='1.7.26'
@@ -70,6 +72,7 @@ for E in $(find_examples); do
   # Replace the 'project(...)' dependencies.
   perl -i \
     -pe "s/project\\(':core'\\)/'com.linecorp.armeria:armeria'/g;" \
+    -pe "s/project\\(':grpc'\\)/'com.linecorp.armeria:armeria-grpc'/g;" \
     -pe "s/project\\(':logback'\\)/'com.linecorp.armeria:armeria-logback'/g;" \
     -pe "s/project\\(':saml'\\)/'com.linecorp.armeria:armeria-saml'/g;" \
     -pe "s/project\\(':spring:boot-actuator-starter'\\)/'com.linecorp.armeria:armeria-spring-boot-actuator-starter'/g;" \
@@ -82,8 +85,10 @@ for E in $(find_examples); do
 
   # Append version numbers to the 3rd party dependencies.
   perl -i \
+    -pe "s/'jakarta.annotation:jakarta.annotation-api'/'jakarta.annotation:jakarta.annotation-api:$JAKARTA_ANNOTATION_API_VERSION'/g;" \
     -pe "s/'junit:junit'/'junit:junit:$JUNIT_VERSION'/g;" \
     -pe "s/'net.javacrumbs.json-unit:json-unit-fluent'/'net.javacrumbs.json-unit:json-unit-fluent:$JSON_UNIT_VERSION'/g;" \
+    -pe "s/'org.awaitility:awaitility'/'org.awaitility:awaitility:$AWAITILITY_VERSION'/g;" \
     -pe "s/'org.assertj:assertj-core'/'org.assertj:assertj-core:$ASSERTJ_VERSION'/g;" \
     -pe "s/'org.slf4j:slf4j-simple'/'org.slf4j:slf4j-simple:$SLF4J_VERSION'/g;" \
     -pe "s/'io.projectreactor:reactor-core'/'io.projectreactor:reactor-core:$IO_PROJECTREACTOR_VERSION'/g;" \
@@ -91,6 +96,13 @@ for E in $(find_examples); do
     "$TMPF"
 
   {
+    if [ "$E" = "grpc-service" ]; then
+      echo 'buildscript {'
+      echo '  dependencies {'
+      echo "    classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'"
+      echo '  }'
+      echo '}'
+    fi
     # Add the 'plugins' section.
     PLUGINS=('io.spring.dependency-management')
     PLUGIN_VERSIONS=("$DEPENDENCY_MANAGEMENT_PLUGIN_VERSION")
@@ -109,7 +121,25 @@ for E in $(find_examples); do
     echo "apply plugin: 'java'"
     echo "apply plugin: 'eclipse'"
     echo "apply plugin: 'idea'"
-    echo
+    if [ "$E" = "grpc-service" ]; then
+      echo "apply plugin: 'com.google.protobuf'"
+      echo
+      echo 'sourceSets {'
+      echo '  main {'
+      echo '    java {'
+      echo "      srcDir 'gen-src/main/grpc'"
+      echo '    }'
+      echo '  }'
+      echo '  test {'
+      echo '    java {'
+      echo "      srcDir 'gen-src/test/grpc'"
+      echo '    }'
+      echo '  }'
+      echo '}'
+      echo
+    else
+      echo
+    fi
 
     # Define the repositories.
     echo 'repositories {'
