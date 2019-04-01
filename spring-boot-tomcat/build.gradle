@@ -13,7 +13,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.82.0'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.83.0'
     }
 }
 
@@ -33,7 +33,7 @@ dependencies {
     runtime 'com.linecorp.armeria:armeria-spring-boot-actuator-starter'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'org.assertj:assertj-core:3.12.1'
+    testCompile 'org.assertj:assertj-core:3.12.2'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
@@ -44,3 +44,4 @@ tasks.withType(JavaCompile) {
     options.debug = true
     options.compilerArgs += '-parameters'
 }
+
