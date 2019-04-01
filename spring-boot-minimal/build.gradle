@@ -13,7 +13,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.82.0'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.83.0'
     }
 }
 
@@ -42,3 +42,4 @@ tasks.withType(JavaCompile) {
     options.debug = true
     options.compilerArgs += '-parameters'
 }
+

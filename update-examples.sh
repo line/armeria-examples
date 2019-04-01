@@ -1,11 +1,13 @@
 #!/bin/bash -e
-ASSERTJ_VERSION='3.12.1'
+ASSERTJ_VERSION='3.12.2'
 AWAITILITY_VERSION='3.1.6'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.7.RELEASE'
 IO_PROJECTREACTOR_VERSION='3.2.6.RELEASE'
 JAKARTA_ANNOTATION_API_VERSION='1.3.4'
 JSON_UNIT_VERSION='2.4.0'
 JUNIT_VERSION='4.12'
+PROTOC_VERSION='3.6.1'
+PROTOC_GEN_GRPC_VERSION='1.19.0'
 SLF4J_VERSION='1.7.26'
 SPRING_BOOT_VERSION='2.1.3.RELEASE'
 
@@ -98,9 +100,9 @@ for E in $(find_examples); do
   {
     if [ "$E" = "grpc-service" ]; then
       echo 'buildscript {'
-      echo '  dependencies {'
-      echo "    classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'"
-      echo '  }'
+      echo '    dependencies {'
+      echo "        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'"
+      echo '    }'
       echo '}'
     fi
     # Add the 'plugins' section.
@@ -111,11 +113,17 @@ for E in $(find_examples); do
       PLUGIN_VERSIONS+=("$SPRING_BOOT_VERSION")
     fi
     echo 'plugins {'
+    if grep -qF "id 'application'" "$TMPF"; then
+      echo "    id 'application'"
+    fi
     for ((I=0; I<${#PLUGINS[@]}; I++)); do
       echo "    id \"${PLUGINS[$I]}\" version \"${PLUGIN_VERSIONS[$I]}\""
     done
     echo '}'
     echo
+
+    # Remove the application plugin because we added it.
+    perl -i -pe 'BEGIN{undef $/;} s/plugins.*?}//smg' "$TMPF"
 
     # Apply the common plugins.
     echo "apply plugin: 'java'"
@@ -123,23 +131,8 @@ for E in $(find_examples); do
     echo "apply plugin: 'idea'"
     if [ "$E" = "grpc-service" ]; then
       echo "apply plugin: 'com.google.protobuf'"
-      echo
-      echo 'sourceSets {'
-      echo '  main {'
-      echo '    java {'
-      echo "      srcDir 'gen-src/main/grpc'"
-      echo '    }'
-      echo '  }'
-      echo '  test {'
-      echo '    java {'
-      echo "      srcDir 'gen-src/test/grpc'"
-      echo '    }'
-      echo '  }'
-      echo '}'
-      echo
-    else
-      echo
     fi
+    echo
 
     # Define the repositories.
     echo 'repositories {'
@@ -154,6 +147,31 @@ for E in $(find_examples); do
     echo '    }'
     echo '}'
     echo
+
+    if [ "$E" = "grpc-service" ]; then
+      echo 'protobuf {'
+      echo '    // Configure the protoc executable.'
+      echo '    protoc {'
+      echo '        // Download from the repository.'
+      echo "        artifact = 'com.google.protobuf:protoc:$PROTOC_VERSION'"
+      echo '    }'
+      echo
+      echo '    // Locate the codegen plugins.'
+      echo '    plugins {'
+      echo "        // Locate a plugin with name 'grpc'."
+      echo '        grpc {'
+      echo '            // Download from the repository.'
+      echo "            artifact = 'io.grpc:protoc-gen-grpc-java:$PROTOC_GEN_GRPC_VERSION'"
+      echo '        }'
+      echo '    }'
+      echo '    generateProtoTasks {'
+      echo "        ofSourceSet('main')*.plugins {"
+      echo '            grpc {}'
+      echo '        }'
+      echo '    }'
+      echo '}'
+      echo
+    fi
 
     # Paste the patched file while removing the redundant empty lines.
     perl -e '
@@ -172,6 +190,7 @@ for E in $(find_examples); do
     echo '    options.debug = true'
     echo "    options.compilerArgs += '-parameters'"
     echo '}'
+    echo
   } > "$E/build.gradle"
 done
 
