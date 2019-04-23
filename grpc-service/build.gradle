@@ -18,7 +18,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.83.0'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.84.0'
     }
 }
 
@@ -26,7 +26,7 @@ protobuf {
     // Configure the protoc executable.
     protoc {
         // Download from the repository.
-        artifact = 'com.google.protobuf:protoc:3.6.1'
+        artifact = 'com.google.protobuf:protoc:3.7.1'
     }
 
     // Locate the codegen plugins.
@@ -34,7 +34,7 @@ protobuf {
         // Locate a plugin with name 'grpc'.
         grpc {
             // Download from the repository.
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.19.0'
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.20.0'
         }
     }
     generateProtoTasks {
@@ -47,13 +47,13 @@ protobuf {
 dependencies {
     compile 'com.linecorp.armeria:armeria'
     compile 'com.linecorp.armeria:armeria-grpc'
-    compile 'io.projectreactor:reactor-core:3.2.6.RELEASE'
+    compile 'io.projectreactor:reactor-core:3.2.8.RELEASE'
     compileOnly 'jakarta.annotation:jakarta.annotation-api:1.3.4'
     runtime 'org.slf4j:slf4j-simple:1.7.26'
 
     testCompile 'jakarta.annotation:jakarta.annotation-api:1.3.4'
     testCompile 'junit:junit:4.12'
-    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.4.0'
+    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.6.1'
     testCompile 'org.assertj:assertj-core:3.12.2'
     testCompile 'org.awaitility:awaitility:3.1.6'
 }

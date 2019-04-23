@@ -12,18 +12,18 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.83.0'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.84.0'
     }
 }
 
 dependencies {
     compile 'com.linecorp.armeria:armeria'
-    compile 'io.projectreactor:reactor-core:3.2.6.RELEASE'
+    compile 'io.projectreactor:reactor-core:3.2.8.RELEASE'
     runtime 'org.slf4j:slf4j-simple:1.7.26'
 
-    testCompile 'io.projectreactor:reactor-test:3.2.6.RELEASE'
+    testCompile 'io.projectreactor:reactor-test:3.2.8.RELEASE'
     testCompile 'junit:junit:4.12'
-    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.4.0'
+    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.6.1'
     testCompile 'org.assertj:assertj-core:3.12.2'
 }
 
