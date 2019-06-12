@@ -12,7 +12,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.86.0'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.87.0'
     }
 }
 
@@ -22,7 +22,7 @@ dependencies {
     runtime 'org.slf4j:slf4j-simple:1.7.26'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.6.1'
+    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.7.0'
     testCompile 'org.assertj:assertj-core:3.12.2'
 }
 
