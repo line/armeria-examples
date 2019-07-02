@@ -10,7 +10,7 @@ NETTY_VERSION='4.1.37.Final'
 PROTOC_VERSION='3.7.1'
 PROTOC_GEN_GRPC_VERSION='1.21.0'
 SLF4J_VERSION='1.7.26'
-SPRING_BOOT_VERSION='2.1.5.RELEASE'
+SPRING_BOOT_VERSION='2.1.6.RELEASE'
 
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <Armeria version> <Armeria working copy path>"
