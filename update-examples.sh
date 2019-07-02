@@ -1,11 +1,12 @@
 #!/bin/bash -e
 ASSERTJ_VERSION='3.12.2'
 AWAITILITY_VERSION='3.1.6'
-DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.7.RELEASE'
+DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.8.RELEASE'
 IO_PROJECTREACTOR_VERSION='3.2.10.RELEASE'
 JAKARTA_ANNOTATION_API_VERSION='1.3.4'
 JSON_UNIT_VERSION='2.7.0'
 JUNIT_VERSION='4.12'
+NETTY_VERSION='4.1.37.Final'
 PROTOC_VERSION='3.7.1'
 PROTOC_GEN_GRPC_VERSION='1.21.0'
 SLF4J_VERSION='1.7.26'
@@ -143,6 +144,7 @@ for E in $(find_examples); do
     # Import the BOM.
     echo 'dependencyManagement {'
     echo '    imports {'
+    echo "        mavenBom 'io.netty:netty-bom:$NETTY_VERSION'"
     echo "        mavenBom 'com.linecorp.armeria:armeria-bom:$VERSION'"
     echo '    }'
     echo '}'
