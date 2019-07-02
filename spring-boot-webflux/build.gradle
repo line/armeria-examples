@@ -1,5 +1,5 @@
 plugins {
-    id "io.spring.dependency-management" version "1.0.7.RELEASE"
+    id "io.spring.dependency-management" version "1.0.8.RELEASE"
     id "org.springframework.boot" version "2.1.5.RELEASE"
 }
 
@@ -13,7 +13,8 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.87.0'
+        mavenBom 'io.netty:netty-bom:4.1.37.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.88.0'
     }
 }
 
