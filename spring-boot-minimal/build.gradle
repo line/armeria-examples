@@ -1,6 +1,6 @@
 plugins {
     id "io.spring.dependency-management" version "1.0.8.RELEASE"
-    id "org.springframework.boot" version "2.1.7.RELEASE"
+    id "org.springframework.boot" version "2.1.8.RELEASE"
 }
 
 apply plugin: 'java'
@@ -13,8 +13,8 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.netty:netty-bom:4.1.39.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.92.0'
+        mavenBom 'io.netty:netty-bom:4.1.42.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.93.0'
     }
 }
 
@@ -32,7 +32,7 @@ dependencies {
     runtime 'com.linecorp.armeria:armeria-spring-boot-actuator-starter'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.8.0'
+    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.8.1'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 

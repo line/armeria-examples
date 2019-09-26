@@ -13,19 +13,19 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.netty:netty-bom:4.1.39.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.92.0'
+        mavenBom 'io.netty:netty-bom:4.1.42.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.93.0'
     }
 }
 
 dependencies {
     compile 'com.linecorp.armeria:armeria'
-    compile 'io.projectreactor:reactor-core:3.2.11.RELEASE'
+    compile 'io.projectreactor:reactor-core:3.3.0.RELEASE'
     runtime 'org.slf4j:slf4j-simple:1.7.28'
 
-    testCompile 'io.projectreactor:reactor-test:3.2.11.RELEASE'
+    testCompile 'io.projectreactor:reactor-test:3.3.0.RELEASE'
     testCompile 'junit:junit:4.12'
-    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.8.0'
+    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.8.1'
     testCompile 'org.assertj:assertj-core:3.13.2'
 }
 
