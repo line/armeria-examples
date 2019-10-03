@@ -20,7 +20,7 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom 'io.netty:netty-bom:4.1.42.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.93.0'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.94.0'
     }
 }
 
@@ -36,7 +36,7 @@ protobuf {
         // Locate a plugin with name 'grpc'.
         grpc {
             // Download from the repository.
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.23.0'
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.24.0'
         }
     }
     generateProtoTasks {
