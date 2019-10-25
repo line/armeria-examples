@@ -13,8 +13,8 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.netty:netty-bom:4.1.42.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.94.0'
+        mavenBom 'io.netty:netty-bom:4.1.43.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.95.0'
     }
 }
 
@@ -25,7 +25,7 @@ dependencies {
 
     testCompile 'io.projectreactor:reactor-test:3.3.0.RELEASE'
     testCompile 'junit:junit:4.12'
-    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.8.1'
+    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.10.0'
     testCompile 'org.assertj:assertj-core:3.13.2'
 }
 
