@@ -14,17 +14,17 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom 'io.netty:netty-bom:4.1.43.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.95.0'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.96.0'
     }
 }
 
 dependencies {
     compile 'com.linecorp.armeria:armeria'
-    runtime 'org.slf4j:slf4j-simple:1.7.28'
+    runtime 'org.slf4j:slf4j-simple:1.7.29'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.10.0'
-    testCompile 'org.assertj:assertj-core:3.13.2'
+    testCompile 'net.javacrumbs.json-unit:json-unit-fluent:2.11.1'
+    testCompile 'org.assertj:assertj-core:3.14.0'
 }
 
 application {
