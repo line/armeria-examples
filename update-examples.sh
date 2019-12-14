@@ -9,6 +9,7 @@ JUNIT_VERSION='4.12'
 NETTY_VERSION='4.1.43.Final'
 PROTOC_VERSION='3.10.1'
 PROTOC_GEN_GRPC_VERSION='1.25.0'
+REACTIVE_GRPC_VERSION='1.0.0'
 SLF4J_VERSION='1.7.29'
 SPRING_BOOT_VERSION='2.2.1.RELEASE'
 
@@ -96,10 +97,11 @@ for E in $(find_examples); do
     -pe "s/'org.slf4j:slf4j-simple'/'org.slf4j:slf4j-simple:$SLF4J_VERSION'/g;" \
     -pe "s/'io.projectreactor:reactor-core'/'io.projectreactor:reactor-core:$IO_PROJECTREACTOR_VERSION'/g;" \
     -pe "s/'io.projectreactor:reactor-test'/'io.projectreactor:reactor-test:$IO_PROJECTREACTOR_VERSION'/g;" \
+    -pe "s/'com.salesforce.servicelibs:reactor-grpc-stub'/'com.salesforce.servicelibs:reactor-grpc-stub:$REACTIVE_GRPC_VERSION'/g;" \
     "$TMPF"
 
   {
-    if [ "$E" = "grpc-service" ]; then
+    if [[ "$E" = grpc* ]]; then
       echo 'buildscript {'
       echo '    dependencies {'
       echo "        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'"
@@ -130,7 +132,7 @@ for E in $(find_examples); do
     echo "apply plugin: 'java'"
     echo "apply plugin: 'eclipse'"
     echo "apply plugin: 'idea'"
-    if [ "$E" = "grpc-service" ]; then
+    if [[ "$E" == grpc* ]]; then
       echo "apply plugin: 'com.google.protobuf'"
     fi
     echo
@@ -150,7 +152,7 @@ for E in $(find_examples); do
     echo '}'
     echo
 
-    if [ "$E" = "grpc-service" ]; then
+    if [[ "$E" == grpc* ]]; then
       echo 'protobuf {'
       echo '    // Configure the protoc executable.'
       echo '    protoc {'
@@ -165,10 +167,20 @@ for E in $(find_examples); do
       echo '            // Download from the repository.'
       echo "            artifact = 'io.grpc:protoc-gen-grpc-java:$PROTOC_GEN_GRPC_VERSION'"
       echo '        }'
+      if [[ "$E" == "grpc-reactor" ]]; then
+        echo "        // Locate a plugin with name 'reactorGrpc'."
+        echo '        reactorGrpc {'
+        echo '            // Download from the repository.'
+        echo "            artifact = 'com.salesforce.servicelibs:reactor-grpc:$REACTIVE_GRPC_VERSION'"
+        echo '        }'
+      fi
       echo '    }'
       echo '    generateProtoTasks {'
       echo "        ofSourceSet('main')*.plugins {"
       echo '            grpc {}'
+      if [[ "$E" == "grpc-reactor" ]]; then
+        echo '            reactorGrpc {}'
+      fi
       echo '        }'
       echo '    }'
       echo '}'
