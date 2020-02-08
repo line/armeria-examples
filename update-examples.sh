@@ -1,17 +1,17 @@
 #!/bin/bash -e
-ASSERTJ_VERSION='3.14.0'
-AWAITILITY_VERSION='4.0.1'
+ASSERTJ_VERSION='3.15.0'
+AWAITILITY_VERSION='4.0.2'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.8.RELEASE'
-IO_PROJECTREACTOR_VERSION='3.3.1.RELEASE'
+IO_PROJECTREACTOR_VERSION='3.3.2.RELEASE'
 JAKARTA_ANNOTATION_API_VERSION='1.3.5'
-JSON_UNIT_VERSION='2.11.1'
-JUNIT_VERSION='4.12'
-NETTY_VERSION='4.1.43.Final'
-PROTOC_VERSION='3.10.1'
-PROTOC_GEN_GRPC_VERSION='1.25.0'
+JSON_UNIT_VERSION='2.13.0'
+JUNIT_VERSION='4.13'
+NETTY_VERSION='4.1.45.Final'
+PROTOC_VERSION='3.11.3'
+PROTOC_GEN_GRPC_VERSION='1.27.0'
 REACTIVE_GRPC_VERSION='1.0.0'
-SLF4J_VERSION='1.7.29'
-SPRING_BOOT_VERSION='2.2.1.RELEASE'
+SLF4J_VERSION='1.7.30'
+SPRING_BOOT_VERSION='2.2.4.RELEASE'
 
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <Armeria version> <Armeria working copy path>"
@@ -76,6 +76,7 @@ for E in $(find_examples); do
   # Replace the 'project(...)' dependencies.
   perl -i \
     -pe "s/project\\(':core'\\)/'com.linecorp.armeria:armeria'/g;" \
+    -pe "s/project\\(':dropwizard'\\)/'com.linecorp.armeria:armeria-dropwizard'/g;" \
     -pe "s/project\\(':grpc'\\)/'com.linecorp.armeria:armeria-grpc'/g;" \
     -pe "s/project\\(':logback'\\)/'com.linecorp.armeria:armeria-logback'/g;" \
     -pe "s/project\\(':saml'\\)/'com.linecorp.armeria:armeria-saml'/g;" \

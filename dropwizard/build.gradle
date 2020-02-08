@@ -1,0 +1,45 @@
+plugins {
+    id 'application'
+    id "io.spring.dependency-management" version "1.0.8.RELEASE"
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'io.netty:netty-bom:4.1.45.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.98.0'
+    }
+}
+
+application {
+    mainClassName = 'example.dropwizard.DropwizardArmeriaApplication'
+}
+
+dependencies {
+    implementation 'com.linecorp.armeria:armeria-dropwizard'
+
+    testImplementation 'io.dropwizard:dropwizard-testing'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+}
+
+task runDropwizardExample(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = application.mainClassName
+    args = ['server', 'server.yaml']
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+    options.encoding = 'UTF-8'
+    options.debug = true
+    options.compilerArgs += '-parameters'
+}
+
