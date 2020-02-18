@@ -20,7 +20,8 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom 'io.netty:netty-bom:4.1.45.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.98.1'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.98.2'
+        mavenBom 'org.junit:junit-bom:5.6.0'
     }
 }
 
@@ -28,7 +29,7 @@ protobuf {
     // Configure the protoc executable.
     protoc {
         // Download from the repository.
-        artifact = 'com.google.protobuf:protoc:3.11.3'
+        artifact = 'com.google.protobuf:protoc:3.11.4'
     }
 
     // Locate the codegen plugins.
@@ -36,7 +37,7 @@ protobuf {
         // Locate a plugin with name 'grpc'.
         grpc {
             // Download from the repository.
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.27.0'
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.27.1'
         }
     }
     generateProtoTasks {
@@ -44,6 +45,17 @@ protobuf {
             grpc {}
         }
     }
+}
+
+dependencies {
+  implementation 'com.google.code.findbugs:jsr305:3.0.2'
+  testImplementation 'junit:junit:4.13'
+  testImplementation 'org.junit.jupiter:junit-jupiter-api'
+  testImplementation 'org.junit.jupiter:junit-jupiter-params'
+  testRuntimeOnly 'org.junit.platform:junit-platform-commons'
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+  testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'
 }
 
 dependencies {
@@ -70,5 +82,9 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
     options.debug = true
     options.compilerArgs += '-parameters'
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
 }
 

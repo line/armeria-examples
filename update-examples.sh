@@ -2,13 +2,16 @@
 ASSERTJ_VERSION='3.15.0'
 AWAITILITY_VERSION='4.0.2'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.9.RELEASE'
+DROPWIZARD_VERSION='1.3.18'
 IO_PROJECTREACTOR_VERSION='3.3.2.RELEASE'
 JAKARTA_ANNOTATION_API_VERSION='1.3.5'
 JSON_UNIT_VERSION='2.13.0'
+JSR305_VERSION='3.0.2'
 JUNIT_VERSION='4.13'
+JUNIT_PLATFORM_VERSION='5.6.0'
 NETTY_VERSION='4.1.45.Final'
-PROTOC_VERSION='3.11.3'
-PROTOC_GEN_GRPC_VERSION='1.27.0'
+PROTOC_VERSION='3.11.4'
+PROTOC_GEN_GRPC_VERSION='1.27.1'
 REACTIVE_GRPC_VERSION='1.0.0'
 SLF4J_VERSION='1.7.30'
 SPRING_BOOT_VERSION='2.2.4.RELEASE'
@@ -99,6 +102,7 @@ for E in $(find_examples); do
     -pe "s/'io.projectreactor:reactor-core'/'io.projectreactor:reactor-core:$IO_PROJECTREACTOR_VERSION'/g;" \
     -pe "s/'io.projectreactor:reactor-test'/'io.projectreactor:reactor-test:$IO_PROJECTREACTOR_VERSION'/g;" \
     -pe "s/'com.salesforce.servicelibs:reactor-grpc-stub'/'com.salesforce.servicelibs:reactor-grpc-stub:$REACTIVE_GRPC_VERSION'/g;" \
+    -pe "s/'io.dropwizard:dropwizard-testing'/'io.dropwizard:dropwizard-testing:$DROPWIZARD_VERSION'/g;" \
     "$TMPF"
 
   {
@@ -149,6 +153,7 @@ for E in $(find_examples); do
     echo '    imports {'
     echo "        mavenBom 'io.netty:netty-bom:$NETTY_VERSION'"
     echo "        mavenBom 'com.linecorp.armeria:armeria-bom:$VERSION'"
+    echo "        mavenBom 'org.junit:junit-bom:$JUNIT_PLATFORM_VERSION'"
     echo '    }'
     echo '}'
     echo
@@ -188,6 +193,19 @@ for E in $(find_examples); do
       echo
     fi
 
+    # Add common dependencies
+    echo 'dependencies {'
+    echo "  implementation 'com.google.code.findbugs:jsr305:$JSR305_VERSION'"
+    echo "  testImplementation 'junit:junit:$JUNIT_VERSION'"
+    echo "  testImplementation 'org.junit.jupiter:junit-jupiter-api'"
+    echo "  testImplementation 'org.junit.jupiter:junit-jupiter-params'"
+    echo "  testRuntimeOnly 'org.junit.platform:junit-platform-commons'"
+    echo "  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'"
+    echo "  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'"
+    echo "  testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'"
+    echo '}'
+    echo
+
     # Paste the patched file while removing the redundant empty lines.
     perl -e '
       undef $/; $_=<>;
@@ -195,15 +213,21 @@ for E in $(find_examples); do
       s/(\r?\n)(\r?\n){2,}/\1\1/g;
       print
     ' < "$TMPF"
+    echo
 
     # Configure the Java compiler.
-    echo
     echo 'tasks.withType(JavaCompile) {'
     echo "    sourceCompatibility = '1.8'"
     echo "    targetCompatibility = '1.8'"
     echo "    options.encoding = 'UTF-8'"
     echo '    options.debug = true'
     echo "    options.compilerArgs += '-parameters'"
+    echo '}'
+    echo
+
+    # Configure JUnit.
+    echo 'tasks.withType(Test) {'
+    echo '    useJUnitPlatform()'
     echo '}'
     echo
   } > "$E/build.gradle"
