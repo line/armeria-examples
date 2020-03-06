@@ -2,19 +2,19 @@
 ASSERTJ_VERSION='3.15.0'
 AWAITILITY_VERSION='4.0.2'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.9.RELEASE'
-DROPWIZARD_VERSION='1.3.18'
-IO_PROJECTREACTOR_VERSION='3.3.2.RELEASE'
+DROPWIZARD_VERSION='1.3.20'
+IO_PROJECTREACTOR_VERSION='3.3.3.RELEASE'
 JAKARTA_ANNOTATION_API_VERSION='1.3.5'
 JSON_UNIT_VERSION='2.13.0'
 JSR305_VERSION='3.0.2'
 JUNIT_VERSION='4.13'
 JUNIT_PLATFORM_VERSION='5.6.0'
-NETTY_VERSION='4.1.45.Final'
+NETTY_VERSION='4.1.46.Final'
 PROTOC_VERSION='3.11.4'
-PROTOC_GEN_GRPC_VERSION='1.27.1'
+PROTOC_GEN_GRPC_VERSION='1.27.2'
 REACTIVE_GRPC_VERSION='1.0.0'
 SLF4J_VERSION='1.7.30'
-SPRING_BOOT_VERSION='2.2.4.RELEASE'
+SPRING_BOOT_VERSION='2.2.5.RELEASE'
 
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <Armeria version> <Armeria working copy path>"
@@ -109,7 +109,7 @@ for E in $(find_examples); do
     if [[ "$E" = grpc* ]]; then
       echo 'buildscript {'
       echo '    dependencies {'
-      echo "        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'"
+      echo "        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.12'"
       echo '    }'
       echo '}'
     fi
