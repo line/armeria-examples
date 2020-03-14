@@ -13,8 +13,8 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.netty:netty-bom:4.1.46.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.98.4'
+        mavenBom 'io.netty:netty-bom:4.1.47.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.98.5'
         mavenBom 'org.junit:junit-bom:5.6.0'
     }
 }
@@ -35,7 +35,7 @@ dependencies {
     implementation 'com.linecorp.armeria:armeria-saml'
     runtimeOnly 'org.slf4j:slf4j-simple:1.7.30'
 
-    testImplementation 'net.javacrumbs.json-unit:json-unit-fluent:2.13.0'
+    testImplementation 'net.javacrumbs.json-unit:json-unit-fluent:2.14.0'
     testImplementation 'org.assertj:assertj-core:3.15.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
 }
