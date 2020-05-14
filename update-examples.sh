@@ -1,20 +1,21 @@
 #!/bin/bash -e
-ASSERTJ_VERSION='3.15.0'
+ASSERTJ_VERSION='3.16.1'
 AWAITILITY_VERSION='4.0.2'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.9.RELEASE'
-DROPWIZARD_VERSION='2.0.2'
-IO_PROJECTREACTOR_VERSION='3.3.3.RELEASE'
+DROPWIZARD_VERSION='2.0.9'
+IO_PROJECTREACTOR_VERSION='3.3.5.RELEASE'
 JAKARTA_ANNOTATION_API_VERSION='1.3.5'
-JSON_UNIT_VERSION='2.14.0'
+JSON_UNIT_VERSION='2.17.0'
 JSR305_VERSION='3.0.2'
 JUNIT_VERSION='4.13'
-JUNIT_PLATFORM_VERSION='5.6.1'
-NETTY_VERSION='4.1.47.Final'
+JUNIT_PLATFORM_VERSION='5.6.2'
+MICROMETER_VERSION='1.5.1'
+NETTY_VERSION='4.1.50.Final'
 PROTOC_VERSION='3.11.4'
-PROTOC_GEN_GRPC_VERSION='1.28.0'
+PROTOC_GEN_GRPC_VERSION='1.29.0'
 REACTIVE_GRPC_VERSION='1.0.0'
 SLF4J_VERSION='1.7.30'
-SPRING_BOOT_VERSION='2.2.5.RELEASE'
+SPRING_BOOT_VERSION='2.2.7.RELEASE'
 
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <Armeria version> <Armeria working copy path>"
@@ -91,6 +92,9 @@ for E in $(find_examples); do
     -pe "s/project\\(':tomcat'\\)/'com.linecorp.armeria:armeria-tomcat'/g;" \
     "$TMPF"
 
+  # Remove the line that refers to `project(':annotation-processor')`.
+  perl -i -pe 's/^.*:annotation-processor.*$//g' "$TMPF"
+
   # Append version numbers to the 3rd party dependencies.
   perl -i \
     -pe "s/'jakarta.annotation:jakarta.annotation-api'/'jakarta.annotation:jakarta.annotation-api:$JAKARTA_ANNOTATION_API_VERSION'/g;" \
@@ -151,6 +155,7 @@ for E in $(find_examples); do
     # Import the BOM.
     echo 'dependencyManagement {'
     echo '    imports {'
+    echo "        mavenBom 'io.micrometer:micrometer-bom:$MICROMETER_VERSION'"
     echo "        mavenBom 'io.netty:netty-bom:$NETTY_VERSION'"
     echo "        mavenBom 'com.linecorp.armeria:armeria-bom:$VERSION'"
     echo "        mavenBom 'org.junit:junit-bom:$JUNIT_PLATFORM_VERSION'"
@@ -197,6 +202,7 @@ for E in $(find_examples); do
     echo 'dependencies {'
     echo "  implementation 'com.google.code.findbugs:jsr305:$JSR305_VERSION'"
     echo "  testImplementation 'junit:junit:$JUNIT_VERSION'"
+    echo "  testImplementation 'org.assertj:assertj-core:$ASSERTJ_VERSION'"
     echo "  testImplementation 'org.junit.jupiter:junit-jupiter-api'"
     echo "  testImplementation 'org.junit.jupiter:junit-jupiter-params'"
     echo "  testRuntimeOnly 'org.junit.platform:junit-platform-commons'"
