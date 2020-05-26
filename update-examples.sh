@@ -15,7 +15,7 @@ PROTOC_VERSION='3.11.4'
 PROTOC_GEN_GRPC_VERSION='1.29.0'
 REACTIVE_GRPC_VERSION='1.0.0'
 SLF4J_VERSION='1.7.30'
-SPRING_BOOT_VERSION='2.2.7.RELEASE'
+SPRING_BOOT_VERSION='2.3.0.RELEASE'
 
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <Armeria version> <Armeria working copy path>"
@@ -107,6 +107,7 @@ for E in $(find_examples); do
     -pe "s/'io.projectreactor:reactor-test'/'io.projectreactor:reactor-test:$IO_PROJECTREACTOR_VERSION'/g;" \
     -pe "s/'com.salesforce.servicelibs:reactor-grpc-stub'/'com.salesforce.servicelibs:reactor-grpc-stub:$REACTIVE_GRPC_VERSION'/g;" \
     -pe "s/'io.dropwizard:dropwizard-testing'/'io.dropwizard:dropwizard-testing:$DROPWIZARD_VERSION'/g;" \
+    -pe "s/'org.springframework.boot:spring-boot-configuration-processor'/'org.springframework.boot:spring-boot-configuration-processor:$SPRING_BOOT_VERSION'/g;" \
     "$TMPF"
 
   {
