@@ -108,6 +108,7 @@ for E in $(find_examples); do
     -pe "s/'com.salesforce.servicelibs:reactor-grpc-stub'/'com.salesforce.servicelibs:reactor-grpc-stub:$REACTIVE_GRPC_VERSION'/g;" \
     -pe "s/'io.dropwizard:dropwizard-testing'/'io.dropwizard:dropwizard-testing:$DROPWIZARD_VERSION'/g;" \
     -pe "s/'org.springframework.boot:spring-boot-configuration-processor'/'org.springframework.boot:spring-boot-configuration-processor:$SPRING_BOOT_VERSION'/g;" \
+    -pe "s/'org.springframework.boot:spring-boot-starter-test'/'org.springframework.boot:spring-boot-starter-test:$SPRING_BOOT_VERSION'/g;" \
     "$TMPF"
 
   {
