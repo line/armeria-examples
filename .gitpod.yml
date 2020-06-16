@@ -2,8 +2,8 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - init: 'cd $project && ./gradlew classes && cd ..; done' # runs during prebuild
-  - command: 'cd $project && ./gradlew run'
+  - init: 'cd "$project" && ./gradlew classes && cd ..; done' # runs during prebuild
+  - command: 'cd "$project" && ./gradlew run'
   - command: 'gp await-port 8080 && gp preview $(gp url 8080)/docs'
 
 ports:
