@@ -39,7 +39,7 @@ application {
 dependencies {
     implementation 'com.linecorp.armeria:armeria-dropwizard'
 
-    testImplementation 'io.dropwizard:dropwizard-testing:2.0.9'
+    testImplementation 'io.dropwizard:dropwizard-testing:2.0.10'
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
 }
 
