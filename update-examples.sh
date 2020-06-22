@@ -122,7 +122,7 @@ for E in $(find_examples); do
     # Add the 'plugins' section.
     PLUGINS=('io.spring.dependency-management')
     PLUGIN_VERSIONS=("$DEPENDENCY_MANAGEMENT_PLUGIN_VERSION")
-    if grep -qF springBoot "$TMPF"; then
+    if grep -qF spring-boot "$TMPF"; then
       PLUGINS+=('org.springframework.boot')
       PLUGIN_VERSIONS+=("$SPRING_BOOT_VERSION")
     fi
