@@ -15,7 +15,7 @@ dependencyManagement {
     imports {
         mavenBom 'io.micrometer:micrometer-bom:1.5.1'
         mavenBom 'io.netty:netty-bom:4.1.50.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.99.7'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.99.8'
         mavenBom 'org.junit:junit-bom:5.6.2'
     }
 }
@@ -33,11 +33,11 @@ dependencies {
 }
 
 dependencies {
-    implementation 'com.linecorp.armeria:armeria-spring-boot-webflux-starter'
+    implementation 'com.linecorp.armeria:armeria-spring-boot2-webflux-starter'
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.3.1.RELEASE'
 
-    runtimeOnly 'com.linecorp.armeria:armeria-spring-boot-actuator-starter'
+    runtimeOnly 'com.linecorp.armeria:armeria-spring-boot2-actuator-starter'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.3.1.RELEASE'

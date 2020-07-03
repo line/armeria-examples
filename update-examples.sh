@@ -3,7 +3,7 @@ ASSERTJ_VERSION='3.16.1'
 AWAITILITY_VERSION='4.0.3'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.9.RELEASE'
 DROPWIZARD_VERSION='2.0.10'
-IO_PROJECTREACTOR_VERSION='3.3.6.RELEASE'
+IO_PROJECTREACTOR_VERSION='3.3.7.RELEASE'
 JAKARTA_ANNOTATION_API_VERSION='1.3.5'
 JSON_UNIT_VERSION='2.18.1'
 JSR305_VERSION='3.0.2'
@@ -45,7 +45,7 @@ cp -f "$SRC_DIR/examples/README.md" .
 
 function find_examples() {
   find "$SRC_DIR/examples" -mindepth 1 -maxdepth 1 -type d -print | while read -r D; do
-    if [[ -f "$D/build.gradle" ]]; then
+    if [[ -f "$D/build.gradle" && "$D" != *-scala ]]; then
       basename "$D"
     fi
   done
@@ -80,16 +80,16 @@ for E in $(find_examples); do
   # Replace the 'project(...)' dependencies.
   perl -i \
     -pe "s/project\\(':core'\\)/'com.linecorp.armeria:armeria'/g;" \
-    -pe "s/project\\(':dropwizard'\\)/'com.linecorp.armeria:armeria-dropwizard'/g;" \
+    -pe "s/project\\(':dropwizard2'\\)/'com.linecorp.armeria:armeria-dropwizard2'/g;" \
     -pe "s/project\\(':grpc'\\)/'com.linecorp.armeria:armeria-grpc'/g;" \
     -pe "s/project\\(':logback'\\)/'com.linecorp.armeria:armeria-logback'/g;" \
     -pe "s/project\\(':saml'\\)/'com.linecorp.armeria:armeria-saml'/g;" \
-    -pe "s/project\\(':spring:boot-actuator-starter'\\)/'com.linecorp.armeria:armeria-spring-boot-actuator-starter'/g;" \
-    -pe "s/project\\(':spring:boot-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot-autoconfigure'/g;" \
-    -pe "s/project\\(':spring:boot-starter'\\)/'com.linecorp.armeria:armeria-spring-boot-starter'/g;" \
-    -pe "s/project\\(':spring:boot-webflux-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot-webflux-autoconfigure'/g;" \
-    -pe "s/project\\(':spring:boot-webflux-starter'\\)/'com.linecorp.armeria:armeria-spring-boot-webflux-starter'/g;" \
-    -pe "s/project\\(':tomcat'\\)/'com.linecorp.armeria:armeria-tomcat'/g;" \
+    -pe "s/project\\(':spring:boot2-actuator-starter'\\)/'com.linecorp.armeria:armeria-spring-boot2-actuator-starter'/g;" \
+    -pe "s/project\\(':spring:boot2-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot2-autoconfigure'/g;" \
+    -pe "s/project\\(':spring:boot2-starter'\\)/'com.linecorp.armeria:armeria-spring-boot2-starter'/g;" \
+    -pe "s/project\\(':spring:boot2-webflux-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot2-webflux-autoconfigure'/g;" \
+    -pe "s/project\\(':spring:boot2-webflux-starter'\\)/'com.linecorp.armeria:armeria-spring-boot2-webflux-starter'/g;" \
+    -pe "s/project\\(':tomcat9'\\)/'com.linecorp.armeria:armeria-tomcat9'/g;" \
     "$TMPF"
 
   # Remove the line that refers to `project(':annotation-processor')`.
@@ -112,7 +112,7 @@ for E in $(find_examples); do
     "$TMPF"
 
   {
-    if [[ "$E" = grpc* ]]; then
+    if [[ "$E" == grpc* ]]; then
       echo 'buildscript {'
       echo '    dependencies {'
       echo "        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.12'"
