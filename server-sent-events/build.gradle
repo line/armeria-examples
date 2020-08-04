@@ -13,9 +13,9 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micrometer:micrometer-bom:1.5.1'
-        mavenBom 'io.netty:netty-bom:4.1.50.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.99.8'
+        mavenBom 'io.micrometer:micrometer-bom:1.5.3'
+        mavenBom 'io.netty:netty-bom:4.1.51.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.99.9'
         mavenBom 'org.junit:junit-bom:5.6.2'
     }
 }
@@ -34,10 +34,10 @@ dependencies {
 
 dependencies {
     implementation 'com.linecorp.armeria:armeria'
-    implementation 'io.projectreactor:reactor-core:3.3.7.RELEASE'
+    implementation 'io.projectreactor:reactor-core:3.3.8.RELEASE'
     runtimeOnly 'org.slf4j:slf4j-simple:1.7.30'
 
-    testImplementation 'io.projectreactor:reactor-test:3.3.7.RELEASE'
+    testImplementation 'io.projectreactor:reactor-test:3.3.8.RELEASE'
     testImplementation 'net.javacrumbs.json-unit:json-unit-fluent:2.18.1'
     testImplementation 'org.assertj:assertj-core:3.16.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api'

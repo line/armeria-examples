@@ -19,9 +19,9 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micrometer:micrometer-bom:1.5.1'
-        mavenBom 'io.netty:netty-bom:4.1.50.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:0.99.8'
+        mavenBom 'io.micrometer:micrometer-bom:1.5.3'
+        mavenBom 'io.netty:netty-bom:4.1.51.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:0.99.9'
         mavenBom 'org.junit:junit-bom:5.6.2'
     }
 }
@@ -38,7 +38,7 @@ protobuf {
         // Locate a plugin with name 'grpc'.
         grpc {
             // Download from the repository.
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.30.1'
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.31.0'
         }
         // Locate a plugin with name 'reactorGrpc'.
         reactorGrpc {
