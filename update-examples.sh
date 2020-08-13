@@ -1,6 +1,7 @@
 #!/bin/bash -e
 ASSERTJ_VERSION='3.16.1'
 AWAITILITY_VERSION='4.0.3'
+DAGGER_VERSION='2.28.3'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.9.RELEASE'
 DROPWIZARD_VERSION='2.0.12'
 IO_PROJECTREACTOR_VERSION='3.3.8.RELEASE'
@@ -16,6 +17,8 @@ PROTOC_GEN_GRPC_VERSION='1.31.0'
 REACTIVE_GRPC_VERSION='1.0.1'
 SLF4J_VERSION='1.7.30'
 SPRING_BOOT_VERSION='2.3.2.RELEASE'
+SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.3'
+SPOTIFY_FUTURES_EXTRA_VERSION='4.2.2'
 
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <Armeria version> <Armeria working copy path>"
@@ -44,16 +47,17 @@ echo 'Copying README.md ..'
 cp -f "$SRC_DIR/examples/README.md" .
 
 function find_examples() {
-  find "$SRC_DIR/examples" -mindepth 1 -maxdepth 1 -type d -print | while read -r D; do
+  find "$SRC_DIR/examples" -mindepth 1 -maxdepth 2 -type d -print | while read -r D; do
     if [[ -f "$D/build.gradle" && "$D" != *-scala ]]; then
-      basename "$D"
+      echo "${D##*/examples/}"
     fi
   done
 }
 
 echo 'Copying examples ..'
 for E in $(find_examples); do
-  rsync --archive --delete "$SRC_DIR/examples/$E" .
+  echo "$SRC_DIR/examples/$E/"
+  rsync --archive --delete "$SRC_DIR/examples/$E/" "$E"
 done
 
 echo 'Copying Gradle wrapper ..'
@@ -83,6 +87,7 @@ for E in $(find_examples); do
     -pe "s/project\\(':dropwizard2'\\)/'com.linecorp.armeria:armeria-dropwizard2'/g;" \
     -pe "s/project\\(':grpc'\\)/'com.linecorp.armeria:armeria-grpc'/g;" \
     -pe "s/project\\(':logback'\\)/'com.linecorp.armeria:armeria-logback'/g;" \
+    -pe "s/project\\(':rxjava3'\\)/'com.linecorp.armeria:armeria-rxjava3'/g;" \
     -pe "s/project\\(':saml'\\)/'com.linecorp.armeria:armeria-saml'/g;" \
     -pe "s/project\\(':spring:boot2-actuator-starter'\\)/'com.linecorp.armeria:armeria-spring-boot2-actuator-starter'/g;" \
     -pe "s/project\\(':spring:boot2-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot2-autoconfigure'/g;" \
@@ -97,16 +102,21 @@ for E in $(find_examples); do
 
   # Append version numbers to the 3rd party dependencies.
   perl -i \
+    -pe "s/'com.google.dagger:dagger'/'com.google.dagger:dagger:$DAGGER_VERSION'/g;" \
+    -pe "s/'com.google.dagger:dagger-producers'/'com.google.dagger:dagger-producers:$DAGGER_VERSION'/g;" \
+    -pe "s/'com.google.dagger:dagger-compiler'/'com.google.dagger:dagger-compiler:$DAGGER_VERSION'/g;" \
+    -pe "s/'com.salesforce.servicelibs:reactor-grpc-stub'/'com.salesforce.servicelibs:reactor-grpc-stub:$REACTIVE_GRPC_VERSION'/g;" \
+    -pe "s/'com.spotify:completable-futures'/'com.spotify:completable-futures:$SPOTIFY_COMPLETABLE_FUTURES_VERSION'/g;" \
+    -pe "s/'com.spotify:futures-extra'/'com.spotify:futures-extra:$SPOTIFY_FUTURES_EXTRA_VERSION'/g;" \
+    -pe "s/'io.dropwizard:dropwizard-testing'/'io.dropwizard:dropwizard-testing:$DROPWIZARD_VERSION'/g;" \
+    -pe "s/'io.projectreactor:reactor-core'/'io.projectreactor:reactor-core:$IO_PROJECTREACTOR_VERSION'/g;" \
+    -pe "s/'io.projectreactor:reactor-test'/'io.projectreactor:reactor-test:$IO_PROJECTREACTOR_VERSION'/g;" \
     -pe "s/'jakarta.annotation:jakarta.annotation-api'/'jakarta.annotation:jakarta.annotation-api:$JAKARTA_ANNOTATION_API_VERSION'/g;" \
     -pe "s/'junit:junit'/'junit:junit:$JUNIT_VERSION'/g;" \
     -pe "s/'net.javacrumbs.json-unit:json-unit-fluent'/'net.javacrumbs.json-unit:json-unit-fluent:$JSON_UNIT_VERSION'/g;" \
-    -pe "s/'org.awaitility:awaitility'/'org.awaitility:awaitility:$AWAITILITY_VERSION'/g;" \
     -pe "s/'org.assertj:assertj-core'/'org.assertj:assertj-core:$ASSERTJ_VERSION'/g;" \
+    -pe "s/'org.awaitility:awaitility'/'org.awaitility:awaitility:$AWAITILITY_VERSION'/g;" \
     -pe "s/'org.slf4j:slf4j-simple'/'org.slf4j:slf4j-simple:$SLF4J_VERSION'/g;" \
-    -pe "s/'io.projectreactor:reactor-core'/'io.projectreactor:reactor-core:$IO_PROJECTREACTOR_VERSION'/g;" \
-    -pe "s/'io.projectreactor:reactor-test'/'io.projectreactor:reactor-test:$IO_PROJECTREACTOR_VERSION'/g;" \
-    -pe "s/'com.salesforce.servicelibs:reactor-grpc-stub'/'com.salesforce.servicelibs:reactor-grpc-stub:$REACTIVE_GRPC_VERSION'/g;" \
-    -pe "s/'io.dropwizard:dropwizard-testing'/'io.dropwizard:dropwizard-testing:$DROPWIZARD_VERSION'/g;" \
     -pe "s/'org.springframework.boot:spring-boot-configuration-processor'/'org.springframework.boot:spring-boot-configuration-processor:$SPRING_BOOT_VERSION'/g;" \
     -pe "s/'org.springframework.boot:spring-boot-starter-test'/'org.springframework.boot:spring-boot-starter-test:$SPRING_BOOT_VERSION'/g;" \
     "$TMPF"
