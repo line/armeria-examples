@@ -4,11 +4,11 @@
 /out
 /bin
 /tmp
-/*/build
-/*/classes
-/*/out
-/*/bin
-/*/tmp
+/**/build
+/**/classes
+/**/out
+/**/bin
+/**/tmp
 **/gen-java
 **/gen-src
 
