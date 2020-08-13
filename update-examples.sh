@@ -56,7 +56,6 @@ function find_examples() {
 
 echo 'Copying examples ..'
 for E in $(find_examples); do
-  echo "$SRC_DIR/examples/$E/"
   rsync --archive --delete "$SRC_DIR/examples/$E/" "$E"
 done
 
