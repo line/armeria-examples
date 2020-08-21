@@ -12,6 +12,7 @@ JUNIT_VERSION='4.13'
 JUNIT_PLATFORM_VERSION='5.6.2'
 MICROMETER_VERSION='1.5.3'
 NETTY_VERSION='4.1.51.Final'
+ORG_JRUYI_THRIFT="0.4.1"
 PROTOC_VERSION='3.12.0'
 PROTOC_GEN_GRPC_VERSION='1.31.0'
 REACTIVE_GRPC_VERSION='1.0.1'
@@ -95,6 +96,7 @@ for E in $(find_examples); do
     -pe "s/project\\(':spring:boot2-webflux-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot2-webflux-autoconfigure'/g;" \
     -pe "s/project\\(':spring:boot2-webflux-starter'\\)/'com.linecorp.armeria:armeria-spring-boot2-webflux-starter'/g;" \
     -pe "s/project\\(':tomcat9'\\)/'com.linecorp.armeria:armeria-tomcat9'/g;" \
+    -pe "s/project\\(':thrift0.13'\\)/'com.linecorp.armeria:armeria-thrift0.13'/g;" \
     "$TMPF"
 
   # Remove the line that refers to `project(':annotation-processor')`.
@@ -140,6 +142,11 @@ for E in $(find_examples); do
     if grep -qF "id 'application'" "$TMPF"; then
       echo "    id 'application'"
     fi
+
+    if [[ "$E" == thrift* ]]; then
+      echo "    id \"org.jruyi.thrift\" version \"${ORG_JRUYI_THRIFT}\""
+    fi
+
     for ((I=0; I<${#PLUGINS[@]}; I++)); do
       echo "    id \"${PLUGINS[$I]}\" version \"${PLUGIN_VERSIONS[$I]}\""
     done
