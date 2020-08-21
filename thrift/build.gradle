@@ -1,0 +1,60 @@
+plugins {
+    id 'application'
+    id "org.jruyi.thrift" version "0.4.1"
+    id "io.spring.dependency-management" version "1.0.9.RELEASE"
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'io.micrometer:micrometer-bom:1.5.3'
+        mavenBom 'io.netty:netty-bom:4.1.51.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.0.0'
+        mavenBom 'org.junit:junit-bom:5.6.2'
+    }
+}
+
+dependencies {
+  implementation 'com.google.code.findbugs:jsr305:3.0.2'
+  testImplementation 'junit:junit:4.13'
+  testImplementation 'org.assertj:assertj-core:3.16.1'
+  testImplementation 'org.junit.jupiter:junit-jupiter-api'
+  testImplementation 'org.junit.jupiter:junit-jupiter-params'
+  testRuntimeOnly 'org.junit.platform:junit-platform-commons'
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+  testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'
+}
+
+dependencies {
+    implementation 'com.linecorp.armeria:armeria'
+    implementation 'com.linecorp.armeria:armeria-thrift0.13'
+    runtimeOnly 'org.slf4j:slf4j-simple:1.7.30'
+
+    testImplementation 'org.assertj:assertj-core:3.16.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+}
+
+application {
+    mainClassName = 'example.armeria.thrift.Main'
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+    options.encoding = 'UTF-8'
+    options.debug = true
+    options.compilerArgs += '-parameters'
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+}
+
