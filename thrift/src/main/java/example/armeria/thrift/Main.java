@@ -1,7 +1,6 @@
 package example.armeria.thrift;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +42,7 @@ public final class Main {
                      .https(httpsPort)
                      .tlsSelfSigned()
                      .service("/", thriftService)
+                     .service("/second", thriftService)
                      // You can access the documentation service at http://127.0.0.1:8080/docs.
                      // See https://armeria.dev/docs/server-docservice for more information.
                      .serviceUnder("/docs",
