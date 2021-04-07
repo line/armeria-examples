@@ -1,25 +1,24 @@
 #!/bin/bash -e
-ASSERTJ_VERSION='3.16.1'
+ASSERTJ_VERSION='3.17.1'
 AWAITILITY_VERSION='4.0.3'
-DAGGER_VERSION='2.28.3'
+DAGGER_VERSION='2.33'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.9.RELEASE'
-DROPWIZARD_VERSION='2.0.12'
-IO_PROJECTREACTOR_VERSION='3.3.8.RELEASE'
-JAKARTA_ANNOTATION_API_VERSION='1.3.5'
-JSON_UNIT_VERSION='2.18.1'
+DROPWIZARD_VERSION='2.0.20'
+IO_PROJECTREACTOR_VERSION='3.4.4'
+JSON_UNIT_VERSION='2.25.0'
 JSR305_VERSION='3.0.2'
-JUNIT_VERSION='4.13'
-JUNIT_PLATFORM_VERSION='5.6.2'
-MICROMETER_VERSION='1.5.3'
-NETTY_VERSION='4.1.51.Final'
+JUNIT_VERSION='4.13.2'
+JUNIT_PLATFORM_VERSION='5.7.1'
+MICROMETER_VERSION='1.6.5'
+NETTY_VERSION='4.1.63.Final'
 ORG_JRUYI_THRIFT="0.4.1"
 PROTOC_VERSION='3.12.0'
-PROTOC_GEN_GRPC_VERSION='1.31.0'
+PROTOC_GEN_GRPC_VERSION='1.36.1'
 REACTIVE_GRPC_VERSION='1.0.1'
 SLF4J_VERSION='1.7.30'
-SPRING_BOOT_VERSION='2.3.2.RELEASE'
-SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.3'
-SPOTIFY_FUTURES_EXTRA_VERSION='4.2.2'
+SPRING_BOOT_VERSION='2.4.4'
+SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.4'
+SPOTIFY_FUTURES_EXTRA_VERSION='4.3.0'
 
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <Armeria version> <Armeria working copy path>"
@@ -97,7 +96,7 @@ for E in $(find_examples); do
     -pe "s/project\\(':spring:boot2-webflux-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot2-webflux-autoconfigure'/g;" \
     -pe "s/project\\(':spring:boot2-webflux-starter'\\)/'com.linecorp.armeria:armeria-spring-boot2-webflux-starter'/g;" \
     -pe "s/project\\(':tomcat9'\\)/'com.linecorp.armeria:armeria-tomcat9'/g;" \
-    -pe "s/project\\(':thrift0.13'\\)/'com.linecorp.armeria:armeria-thrift0.13'/g;" \
+    -pe "s/project\\(':thrift0.14'\\)/'com.linecorp.armeria:armeria-thrift0.14'/g;" \
     "$TMPF"
 
   # Remove the line that refers to `project(':annotation-processor')`.
