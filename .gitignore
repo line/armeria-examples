@@ -51,3 +51,6 @@ hs_err_pid*
 *.bak
 *.swp
 *~
+
+# macOS folder metadata
+.DS_Store

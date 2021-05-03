@@ -1,24 +1,25 @@
 #!/bin/bash -e
 ASSERTJ_VERSION='3.17.1'
 AWAITILITY_VERSION='4.0.3'
-DAGGER_VERSION='2.33'
-DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.9.RELEASE'
-DROPWIZARD_VERSION='2.0.20'
-IO_PROJECTREACTOR_VERSION='3.4.4'
+DAGGER_VERSION='2.35'
+DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.11.RELEASE'
+DROPWIZARD_VERSION='2.0.21'
+IO_PROJECTREACTOR_VERSION='3.4.5'
 JSON_UNIT_VERSION='2.25.0'
 JSR305_VERSION='3.0.2'
 JUNIT_VERSION='4.13.2'
 JUNIT_PLATFORM_VERSION='5.7.1'
-MICROMETER_VERSION='1.6.5'
+MICROMETER_VERSION='1.6.6'
 NETTY_VERSION='4.1.63.Final'
 ORG_JRUYI_THRIFT="0.4.1"
 PROTOC_VERSION='3.12.0'
 PROTOC_GEN_GRPC_VERSION='1.36.1'
 REACTIVE_GRPC_VERSION='1.0.1'
 SLF4J_VERSION='1.7.30'
-SPRING_BOOT_VERSION='2.4.4'
+SPRING_BOOT_VERSION='2.4.5'
 SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.4'
 SPOTIFY_FUTURES_EXTRA_VERSION='4.3.0'
+JAVAX_ANNOTATION_VERSION='1.3.2'
 
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <Armeria version> <Armeria working copy path>"
@@ -113,7 +114,7 @@ for E in $(find_examples); do
     -pe "s/'io.dropwizard:dropwizard-testing'/'io.dropwizard:dropwizard-testing:$DROPWIZARD_VERSION'/g;" \
     -pe "s/'io.projectreactor:reactor-core'/'io.projectreactor:reactor-core:$IO_PROJECTREACTOR_VERSION'/g;" \
     -pe "s/'io.projectreactor:reactor-test'/'io.projectreactor:reactor-test:$IO_PROJECTREACTOR_VERSION'/g;" \
-    -pe "s/'jakarta.annotation:jakarta.annotation-api'/'jakarta.annotation:jakarta.annotation-api:$JAKARTA_ANNOTATION_API_VERSION'/g;" \
+    -pe "s/'javax.annotation:javax.annotation-api'/'javax.annotation:javax.annotation-api:$JAVAX_ANNOTATION_VERSION'/g;" \
     -pe "s/'junit:junit'/'junit:junit:$JUNIT_VERSION'/g;" \
     -pe "s/'net.javacrumbs.json-unit:json-unit-fluent'/'net.javacrumbs.json-unit:json-unit-fluent:$JSON_UNIT_VERSION'/g;" \
     -pe "s/'org.assertj:assertj-core'/'org.assertj:assertj-core:$ASSERTJ_VERSION'/g;" \
