@@ -14,9 +14,9 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom 'io.micrometer:micrometer-bom:1.7.0'
-        mavenBom 'io.netty:netty-bom:4.1.63.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.8.0'
-        mavenBom 'org.junit:junit-bom:5.7.1'
+        mavenBom 'io.netty:netty-bom:4.1.65.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.9.1'
+        mavenBom 'org.junit:junit-bom:5.7.2'
     }
 }
 
@@ -34,20 +34,21 @@ dependencies {
 
 dependencies {
     implementation 'com.linecorp.armeria:armeria'
-    runtimeOnly 'org.slf4j:slf4j-simple:1.7.30'
+    runtimeOnly 'org.slf4j:slf4j-simple:1.7.31'
 
-    testImplementation 'net.javacrumbs.json-unit:json-unit-fluent:2.25.0'
+    testImplementation 'com.linecorp.armeria:armeria-junit5'
+    testImplementation 'net.javacrumbs.json-unit:json-unit-fluent:2.27.0'
     testImplementation 'org.assertj:assertj-core:3.17.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
 }
 
 application {
-    mainClassName = 'example.armeria.server.files.Main'
+    mainClass.set('example.armeria.server.files.Main')
 }
 
 tasks.withType(JavaCompile) {
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
+    sourceCompatibility = '11'
+    targetCompatibility = '11'
     options.encoding = 'UTF-8'
     options.debug = true
     options.compilerArgs += '-parameters'

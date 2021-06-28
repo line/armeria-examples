@@ -1,6 +1,6 @@
 plugins {
     id 'application'
-    id "org.jruyi.thrift" version "0.4.1"
+    id "org.jruyi.thrift" version "0.4.2"
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
 }
 
@@ -15,9 +15,9 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom 'io.micrometer:micrometer-bom:1.7.0'
-        mavenBom 'io.netty:netty-bom:4.1.63.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.8.0'
-        mavenBom 'org.junit:junit-bom:5.7.1'
+        mavenBom 'io.netty:netty-bom:4.1.65.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.9.1'
+        mavenBom 'org.junit:junit-bom:5.7.2'
     }
 }
 
@@ -36,19 +36,20 @@ dependencies {
 dependencies {
     implementation 'com.linecorp.armeria:armeria'
     implementation 'com.linecorp.armeria:armeria-thrift0.14'
-    runtimeOnly 'org.slf4j:slf4j-simple:1.7.30'
+    runtimeOnly 'org.slf4j:slf4j-simple:1.7.31'
 
+    testImplementation 'com.linecorp.armeria:armeria-junit5'
     testImplementation 'org.assertj:assertj-core:3.17.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
 }
 
 application {
-    mainClassName = 'example.armeria.thrift.Main'
+    mainClass.set('example.armeria.thrift.Main')
 }
 
 tasks.withType(JavaCompile) {
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
+    sourceCompatibility = '11'
+    targetCompatibility = '11'
     options.encoding = 'UTF-8'
     options.debug = true
     options.compilerArgs += '-parameters'
