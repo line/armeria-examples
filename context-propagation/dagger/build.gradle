@@ -14,9 +14,9 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom 'io.micrometer:micrometer-bom:1.7.0'
-        mavenBom 'io.netty:netty-bom:4.1.63.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.8.0'
-        mavenBom 'org.junit:junit-bom:5.7.1'
+        mavenBom 'io.netty:netty-bom:4.1.65.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.9.1'
+        mavenBom 'org.junit:junit-bom:5.7.2'
     }
 }
 
@@ -34,21 +34,21 @@ dependencies {
 
 dependencies {
     implementation 'com.linecorp.armeria:armeria'
-    runtimeOnly 'org.slf4j:slf4j-simple:1.7.30'
+    runtimeOnly 'org.slf4j:slf4j-simple:1.7.31'
 
-    implementation 'com.google.dagger:dagger:2.35'
-    implementation 'com.google.dagger:dagger-producers:2.35'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.35'
+    implementation 'com.google.dagger:dagger:2.37'
+    implementation 'com.google.dagger:dagger-producers:2.37'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.37'
     implementation 'com.spotify:futures-extra:4.3.0'
 }
 
 application {
-    mainClassName = 'example.armeria.contextpropagation.dagger.Main'
+    mainClass.set('example.armeria.contextpropagation.dagger.Main')
 }
 
 tasks.withType(JavaCompile) {
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
+    sourceCompatibility = '11'
+    targetCompatibility = '11'
     options.encoding = 'UTF-8'
     options.debug = true
     options.compilerArgs += '-parameters'

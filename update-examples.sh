@@ -1,22 +1,22 @@
 #!/bin/bash -e
 ASSERTJ_VERSION='3.17.1'
-AWAITILITY_VERSION='4.0.3'
-DAGGER_VERSION='2.35'
+AWAITILITY_VERSION='4.1.0'
+DAGGER_VERSION='2.37'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.11.RELEASE'
-DROPWIZARD_VERSION='2.0.21'
-IO_PROJECTREACTOR_VERSION='3.4.6'
-JSON_UNIT_VERSION='2.25.0'
+DROPWIZARD_VERSION='2.0.23'
+IO_PROJECTREACTOR_VERSION='3.4.7'
+JSON_UNIT_VERSION='2.27.0'
 JSR305_VERSION='3.0.2'
 JUNIT_VERSION='4.13.2'
-JUNIT_PLATFORM_VERSION='5.7.1'
+JUNIT_PLATFORM_VERSION='5.7.2'
 MICROMETER_VERSION='1.7.0'
-NETTY_VERSION='4.1.63.Final'
-ORG_JRUYI_THRIFT="0.4.1"
+NETTY_VERSION='4.1.65.Final'
+ORG_JRUYI_THRIFT="0.4.2"
 PROTOC_VERSION='3.12.0'
 PROTOC_GEN_GRPC_VERSION='1.36.1'
 REACTIVE_GRPC_VERSION='1.0.1'
-SLF4J_VERSION='1.7.30'
-SPRING_BOOT_VERSION='2.4.5'
+SLF4J_VERSION='1.7.31'
+SPRING_BOOT_VERSION='2.5.1'
 SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.4'
 SPOTIFY_FUTURES_EXTRA_VERSION='4.3.0'
 JAVAX_ANNOTATION_VERSION='1.3.2'
@@ -85,6 +85,7 @@ for E in $(find_examples); do
   perl -i \
     -pe "s/project\\(':core'\\)/'com.linecorp.armeria:armeria'/g;" \
     -pe "s/project\\(':dropwizard2'\\)/'com.linecorp.armeria:armeria-dropwizard2'/g;" \
+    -pe "s/project\\(':graphql'\\)/'com.linecorp.armeria:armeria-graphql'/g;" \
     -pe "s/project\\(':grpc'\\)/'com.linecorp.armeria:armeria-grpc'/g;" \
     -pe "s/project\\(':junit5'\\)/'com.linecorp.armeria:armeria-junit5'/g;" \
     -pe "s/project\\(':logback'\\)/'com.linecorp.armeria:armeria-logback'/g;" \
@@ -243,8 +244,8 @@ for E in $(find_examples); do
 
     # Configure the Java compiler.
     echo 'tasks.withType(JavaCompile) {'
-    echo "    sourceCompatibility = '1.8'"
-    echo "    targetCompatibility = '1.8'"
+    echo "    sourceCompatibility = '11'"
+    echo "    targetCompatibility = '11'"
     echo "    options.encoding = 'UTF-8'"
     echo '    options.debug = true'
     echo "    options.compilerArgs += '-parameters'"
