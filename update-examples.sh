@@ -49,7 +49,7 @@ cp -f "$SRC_DIR/examples/README.md" .
 
 function find_examples() {
   find "$SRC_DIR/examples" -mindepth 1 -maxdepth 2 -type d -print | while read -r D; do
-    if [[ -f "$D/build.gradle" && "$D" != *-scala ]]; then
+    if [[ -f "$D/build.gradle" && "$D" != *-scala && "$D" != *-sangria ]]; then
       echo "${D##*/examples/}"
     fi
   done
@@ -86,6 +86,7 @@ for E in $(find_examples); do
     -pe "s/project\\(':core'\\)/'com.linecorp.armeria:armeria'/g;" \
     -pe "s/project\\(':dropwizard2'\\)/'com.linecorp.armeria:armeria-dropwizard2'/g;" \
     -pe "s/project\\(':graphql'\\)/'com.linecorp.armeria:armeria-graphql'/g;" \
+    -pe "s/project\\(':graphql-protocol'\\)/'com.linecorp.armeria:armeria-graphql-protocol'/g;" \
     -pe "s/project\\(':grpc'\\)/'com.linecorp.armeria:armeria-grpc'/g;" \
     -pe "s/project\\(':junit5'\\)/'com.linecorp.armeria:armeria-junit5'/g;" \
     -pe "s/project\\(':logback'\\)/'com.linecorp.armeria:armeria-logback'/g;" \
