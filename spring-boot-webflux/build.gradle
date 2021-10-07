@@ -1,6 +1,6 @@
 plugins {
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
-    id "org.springframework.boot" version "2.5.1"
+    id "org.springframework.boot" version "2.5.5"
 }
 
 apply plugin: 'java'
@@ -13,17 +13,18 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micrometer:micrometer-bom:1.7.0'
-        mavenBom 'io.netty:netty-bom:4.1.65.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.11.0'
-        mavenBom 'org.junit:junit-bom:5.7.2'
+        mavenBom 'io.micrometer:micrometer-bom:1.7.4'
+        mavenBom 'io.netty:netty-bom:4.1.68.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.12.0'
+        mavenBom 'org.junit:junit-bom:5.8.1'
     }
 }
 
 dependencies {
   implementation 'com.google.code.findbugs:jsr305:3.0.2'
+  implementation 'io.netty:netty-tcnative-boringssl-static:2.0.43.Final'
   testImplementation 'junit:junit:4.13.2'
-  testImplementation 'org.assertj:assertj-core:3.17.1'
+  testImplementation 'org.assertj:assertj-core:3.21.0'
   testImplementation 'org.junit.jupiter:junit-jupiter-api'
   testImplementation 'org.junit.jupiter:junit-jupiter-params'
   testRuntimeOnly 'org.junit.platform:junit-platform-commons'
@@ -35,12 +36,12 @@ dependencies {
 dependencies {
     implementation 'com.linecorp.armeria:armeria-spring-boot2-webflux-starter'
 
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.5.1'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.5.5'
 
     runtimeOnly 'com.linecorp.armeria:armeria-spring-boot2-actuator-starter'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.1'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.5'
 }
 
 tasks.withType(JavaCompile) {

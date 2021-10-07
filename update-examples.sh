@@ -1,23 +1,24 @@
 #!/bin/bash -e
-ASSERTJ_VERSION='3.17.1'
+ASSERTJ_VERSION='3.21.0'
 AWAITILITY_VERSION='4.1.0'
 DAGGER_VERSION='2.37'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.11.RELEASE'
-DROPWIZARD_VERSION='2.0.23'
-IO_PROJECTREACTOR_VERSION='3.4.7'
-JSON_UNIT_VERSION='2.27.0'
+DROPWIZARD_VERSION='2.0.25'
+IO_PROJECTREACTOR_VERSION='3.4.10'
+JSON_UNIT_VERSION='2.28.0'
 JSR305_VERSION='3.0.2'
 JUNIT_VERSION='4.13.2'
-JUNIT_PLATFORM_VERSION='5.7.2'
-MICROMETER_VERSION='1.7.0'
-NETTY_VERSION='4.1.65.Final'
+JUNIT_PLATFORM_VERSION='5.8.1'
+MICROMETER_VERSION='1.7.4'
+NETTY_VERSION='4.1.68.Final'
+NETTY_TCNATIVE_VERSION='2.0.43.Final'
 ORG_JRUYI_THRIFT="0.4.2"
-PROTOC_VERSION='3.12.0'
-PROTOC_GEN_GRPC_VERSION='1.36.1'
-REACTIVE_GRPC_VERSION='1.0.1'
+PROTOC_VERSION='3.17.2'
+PROTOC_GEN_GRPC_VERSION='1.41.0'
+REACTIVE_GRPC_VERSION='1.2.2'
 SLF4J_VERSION='1.7.31'
-SPRING_BOOT_VERSION='2.5.1'
-SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.4'
+SPRING_BOOT_VERSION='2.5.5'
+SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.5'
 SPOTIFY_FUTURES_EXTRA_VERSION='4.3.0'
 JAVAX_ANNOTATION_VERSION='1.3.2'
 
@@ -99,7 +100,7 @@ for E in $(find_examples); do
     -pe "s/project\\(':spring:boot2-webflux-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot2-webflux-autoconfigure'/g;" \
     -pe "s/project\\(':spring:boot2-webflux-starter'\\)/'com.linecorp.armeria:armeria-spring-boot2-webflux-starter'/g;" \
     -pe "s/project\\(':tomcat9'\\)/'com.linecorp.armeria:armeria-tomcat9'/g;" \
-    -pe "s/project\\(':thrift0.14'\\)/'com.linecorp.armeria:armeria-thrift0.14'/g;" \
+    -pe "s/project\\(':thrift0.15'\\)/'com.linecorp.armeria:armeria-thrift0.15'/g;" \
     "$TMPF"
 
   # Remove the line that refers to `project(':annotation-processor')`.
@@ -107,6 +108,7 @@ for E in $(find_examples); do
 
   # Append version numbers to the 3rd party dependencies.
   perl -i \
+    -pe "s/'com.google.protobuf:protobuf-java-util'/'com.google.protobuf:protobuf-java-util:$PROTOC_VERSION'/g;" \
     -pe "s/'com.google.dagger:dagger'/'com.google.dagger:dagger:$DAGGER_VERSION'/g;" \
     -pe "s/'com.google.dagger:dagger-producers'/'com.google.dagger:dagger-producers:$DAGGER_VERSION'/g;" \
     -pe "s/'com.google.dagger:dagger-compiler'/'com.google.dagger:dagger-compiler:$DAGGER_VERSION'/g;" \
@@ -223,6 +225,7 @@ for E in $(find_examples); do
     # Add common dependencies
     echo 'dependencies {'
     echo "  implementation 'com.google.code.findbugs:jsr305:$JSR305_VERSION'"
+    echo "  implementation 'io.netty:netty-tcnative-boringssl-static:$NETTY_TCNATIVE_VERSION'"
     echo "  testImplementation 'junit:junit:$JUNIT_VERSION'"
     echo "  testImplementation 'org.assertj:assertj-core:$ASSERTJ_VERSION'"
     echo "  testImplementation 'org.junit.jupiter:junit-jupiter-api'"
