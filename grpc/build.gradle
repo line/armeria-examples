@@ -20,8 +20,8 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom 'io.micrometer:micrometer-bom:1.7.4'
-        mavenBom 'io.netty:netty-bom:4.1.68.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.12.0'
+        mavenBom 'io.netty:netty-bom:4.1.69.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.13.0'
         mavenBom 'org.junit:junit-bom:5.8.1'
     }
 }
@@ -50,7 +50,6 @@ protobuf {
 
 dependencies {
   implementation 'com.google.code.findbugs:jsr305:3.0.2'
-  implementation 'io.netty:netty-tcnative-boringssl-static:2.0.43.Final'
   testImplementation 'junit:junit:4.13.2'
   testImplementation 'org.assertj:assertj-core:3.21.0'
   testImplementation 'org.junit.jupiter:junit-jupiter-api'

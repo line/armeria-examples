@@ -20,8 +20,8 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom 'io.micrometer:micrometer-bom:1.7.4'
-        mavenBom 'io.netty:netty-bom:4.1.68.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.12.0'
+        mavenBom 'io.netty:netty-bom:4.1.69.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.13.0'
         mavenBom 'org.junit:junit-bom:5.8.1'
     }
 }
@@ -43,7 +43,7 @@ protobuf {
         // Locate a plugin with name 'reactorGrpc'.
         reactorGrpc {
             // Download from the repository.
-            artifact = 'com.salesforce.servicelibs:reactor-grpc:1.2.2'
+            artifact = 'com.salesforce.servicelibs:reactor-grpc:1.2.3'
         }
     }
     generateProtoTasks {
@@ -56,7 +56,6 @@ protobuf {
 
 dependencies {
   implementation 'com.google.code.findbugs:jsr305:3.0.2'
-  implementation 'io.netty:netty-tcnative-boringssl-static:2.0.43.Final'
   testImplementation 'junit:junit:4.13.2'
   testImplementation 'org.assertj:assertj-core:3.21.0'
   testImplementation 'org.junit.jupiter:junit-jupiter-api'
@@ -70,7 +69,7 @@ dependencies {
 dependencies {
     implementation 'com.linecorp.armeria:armeria'
     implementation 'com.linecorp.armeria:armeria-grpc'
-    implementation 'com.salesforce.servicelibs:reactor-grpc-stub:1.2.2'
+    implementation 'com.salesforce.servicelibs:reactor-grpc-stub:1.2.3'
     implementation 'io.projectreactor:reactor-core:3.4.10'
     compileOnly 'javax.annotation:javax.annotation-api:1.3.2'
     runtimeOnly 'org.slf4j:slf4j-simple:1.7.31'

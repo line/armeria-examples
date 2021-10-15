@@ -10,12 +10,11 @@ JSR305_VERSION='3.0.2'
 JUNIT_VERSION='4.13.2'
 JUNIT_PLATFORM_VERSION='5.8.1'
 MICROMETER_VERSION='1.7.4'
-NETTY_VERSION='4.1.68.Final'
-NETTY_TCNATIVE_VERSION='2.0.43.Final'
+NETTY_VERSION='4.1.69.Final'
 ORG_JRUYI_THRIFT="0.4.2"
 PROTOC_VERSION='3.17.2'
 PROTOC_GEN_GRPC_VERSION='1.41.0'
-REACTIVE_GRPC_VERSION='1.2.2'
+REACTIVE_GRPC_VERSION='1.2.3'
 SLF4J_VERSION='1.7.31'
 SPRING_BOOT_VERSION='2.5.5'
 SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.5'
@@ -225,7 +224,6 @@ for E in $(find_examples); do
     # Add common dependencies
     echo 'dependencies {'
     echo "  implementation 'com.google.code.findbugs:jsr305:$JSR305_VERSION'"
-    echo "  implementation 'io.netty:netty-tcnative-boringssl-static:$NETTY_TCNATIVE_VERSION'"
     echo "  testImplementation 'junit:junit:$JUNIT_VERSION'"
     echo "  testImplementation 'org.assertj:assertj-core:$ASSERTJ_VERSION'"
     echo "  testImplementation 'org.junit.jupiter:junit-jupiter-api'"
