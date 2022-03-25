@@ -19,9 +19,9 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micrometer:micrometer-bom:1.8.2'
-        mavenBom 'io.netty:netty-bom:4.1.73.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.14.1'
+        mavenBom 'io.micrometer:micrometer-bom:1.8.3'
+        mavenBom 'io.netty:netty-bom:4.1.75.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.15.0'
         mavenBom 'org.junit:junit-bom:5.8.2'
     }
 }
@@ -38,7 +38,7 @@ protobuf {
         // Locate a plugin with name 'grpc'.
         grpc {
             // Download from the repository.
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.41.1'
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.45.0'
         }
         // Locate a plugin with name 'reactorGrpc'.
         reactorGrpc {
@@ -70,15 +70,15 @@ dependencies {
     implementation 'com.linecorp.armeria:armeria'
     implementation 'com.linecorp.armeria:armeria-grpc'
     implementation 'com.salesforce.servicelibs:reactor-grpc-stub:1.2.3'
-    implementation 'io.projectreactor:reactor-core:3.4.14'
+    implementation 'io.projectreactor:reactor-core:3.4.16'
     compileOnly 'javax.annotation:javax.annotation-api:1.3.2'
-    runtimeOnly 'org.slf4j:slf4j-simple:1.7.34'
+    runtimeOnly 'org.slf4j:slf4j-simple:1.7.36'
 
     testImplementation 'com.linecorp.armeria:armeria-junit5'
     testImplementation 'javax.annotation:javax.annotation-api:1.3.2'
-    testImplementation 'net.javacrumbs.json-unit:json-unit-fluent:2.28.0'
+    testImplementation 'net.javacrumbs.json-unit:json-unit-fluent:2.32.0'
     testImplementation 'org.assertj:assertj-core:3.22.0'
-    testImplementation 'org.awaitility:awaitility:4.1.1'
+    testImplementation 'org.awaitility:awaitility:4.2.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
 }
 

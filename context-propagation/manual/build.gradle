@@ -13,9 +13,9 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micrometer:micrometer-bom:1.8.2'
-        mavenBom 'io.netty:netty-bom:4.1.73.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.14.1'
+        mavenBom 'io.micrometer:micrometer-bom:1.8.3'
+        mavenBom 'io.netty:netty-bom:4.1.75.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.15.0'
         mavenBom 'org.junit:junit-bom:5.8.2'
     }
 }
@@ -35,7 +35,7 @@ dependencies {
 dependencies {
     implementation 'com.linecorp.armeria:armeria'
     implementation 'com.spotify:completable-futures:0.3.5'
-    runtimeOnly 'org.slf4j:slf4j-simple:1.7.34'
+    runtimeOnly 'org.slf4j:slf4j-simple:1.7.36'
 }
 
 application {
