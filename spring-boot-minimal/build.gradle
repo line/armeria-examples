@@ -1,6 +1,6 @@
 plugins {
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
-    id "org.springframework.boot" version "2.6.5"
+    id "org.springframework.boot" version "2.7.1"
 }
 
 apply plugin: 'java'
@@ -13,9 +13,9 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micrometer:micrometer-bom:1.8.3'
-        mavenBom 'io.netty:netty-bom:4.1.75.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.15.0'
+        mavenBom 'io.micrometer:micrometer-bom:1.9.1'
+        mavenBom 'io.netty:netty-bom:4.1.78.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.17.0'
         mavenBom 'org.junit:junit-bom:5.8.2'
     }
 }
@@ -23,7 +23,7 @@ dependencyManagement {
 dependencies {
   implementation 'com.google.code.findbugs:jsr305:3.0.2'
   testImplementation 'junit:junit:4.13.2'
-  testImplementation 'org.assertj:assertj-core:3.22.0'
+  testImplementation 'org.assertj:assertj-core:3.23.1'
   testImplementation 'org.junit.jupiter:junit-jupiter-api'
   testImplementation 'org.junit.jupiter:junit-jupiter-params'
   testRuntimeOnly 'org.junit.platform:junit-platform-commons'
@@ -40,13 +40,13 @@ dependencies {
     // If you don't want to use it, you can use the annotation
     // com.linecorp.armeria.server.annotation.Description otherwise.
 
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.6.5'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.7.1'
 
     runtimeOnly 'com.linecorp.armeria:armeria-spring-boot2-actuator-starter'
 
-    testImplementation 'net.javacrumbs.json-unit:json-unit-fluent:2.32.0'
+    testImplementation 'net.javacrumbs.json-unit:json-unit-fluent:2.35.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.5'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.1'
 }
 
 tasks.withType(JavaCompile) {

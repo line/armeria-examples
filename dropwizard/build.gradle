@@ -13,9 +13,9 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micrometer:micrometer-bom:1.8.3'
-        mavenBom 'io.netty:netty-bom:4.1.75.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.15.0'
+        mavenBom 'io.micrometer:micrometer-bom:1.9.1'
+        mavenBom 'io.netty:netty-bom:4.1.78.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.17.0'
         mavenBom 'org.junit:junit-bom:5.8.2'
     }
 }
@@ -23,7 +23,7 @@ dependencyManagement {
 dependencies {
   implementation 'com.google.code.findbugs:jsr305:3.0.2'
   testImplementation 'junit:junit:4.13.2'
-  testImplementation 'org.assertj:assertj-core:3.22.0'
+  testImplementation 'org.assertj:assertj-core:3.23.1'
   testImplementation 'org.junit.jupiter:junit-jupiter-api'
   testImplementation 'org.junit.jupiter:junit-jupiter-params'
   testRuntimeOnly 'org.junit.platform:junit-platform-commons'
@@ -39,7 +39,7 @@ application {
 dependencies {
     implementation 'com.linecorp.armeria:armeria-dropwizard2'
 
-    testImplementation 'io.dropwizard:dropwizard-testing:2.0.28'
+    testImplementation 'io.dropwizard:dropwizard-testing:2.1.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
 }
 
