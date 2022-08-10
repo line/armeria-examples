@@ -19,9 +19,9 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micrometer:micrometer-bom:1.9.1'
-        mavenBom 'io.netty:netty-bom:4.1.78.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.17.1'
+        mavenBom 'io.micrometer:micrometer-bom:1.9.2'
+        mavenBom 'io.netty:netty-bom:4.1.79.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.18.0'
         mavenBom 'org.junit:junit-bom:5.8.2'
     }
 }
@@ -30,7 +30,7 @@ protobuf {
     // Configure the protoc executable.
     protoc {
         // Download from the repository.
-        artifact = 'com.google.protobuf:protoc:3.19.2'
+        artifact = 'com.google.protobuf:protoc:3.21.1'
     }
 
     // Locate the codegen plugins.
@@ -38,7 +38,7 @@ protobuf {
         // Locate a plugin with name 'grpc'.
         grpc {
             // Download from the repository.
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.47.0'
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.48.0'
         }
         // Locate a plugin with name 'reactorGrpc'.
         reactorGrpc {
@@ -70,7 +70,7 @@ dependencies {
     implementation 'com.linecorp.armeria:armeria'
     implementation 'com.linecorp.armeria:armeria-grpc'
     implementation 'com.salesforce.servicelibs:reactor-grpc-stub:1.2.3'
-    implementation 'io.projectreactor:reactor-core:3.4.19'
+    implementation 'io.projectreactor:reactor-core:3.4.21'
     compileOnly 'javax.annotation:javax.annotation-api:1.3.2'
     runtimeOnly 'org.slf4j:slf4j-simple:1.7.36'
 
@@ -80,6 +80,7 @@ dependencies {
     testImplementation 'org.assertj:assertj-core:3.23.1'
     testImplementation 'org.awaitility:awaitility:4.2.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testImplementation 'com.google.protobuf:protobuf-java-util:3.21.1'
 }
 
 application {

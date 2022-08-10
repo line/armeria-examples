@@ -4,22 +4,23 @@ AWAITILITY_VERSION='4.2.0'
 DAGGER_VERSION='2.42'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.11.RELEASE'
 DROPWIZARD_VERSION='2.1.0'
-IO_PROJECTREACTOR_VERSION='3.4.19'
+IO_PROJECTREACTOR_VERSION='3.4.21'
 JSON_UNIT_VERSION='2.35.0'
 JSR305_VERSION='3.0.2'
 JUNIT_VERSION='4.13.2'
 JUNIT_PLATFORM_VERSION='5.8.2'
-MICROMETER_VERSION='1.9.1'
-NETTY_VERSION='4.1.78.Final'
+MICROMETER_VERSION='1.9.2'
+NETTY_VERSION='4.1.79.Final'
 ORG_JRUYI_THRIFT="0.4.2"
-PROTOC_VERSION='3.19.2'
-PROTOC_GEN_GRPC_VERSION='1.47.0'
+PROTOC_VERSION='3.21.1'
+PROTOC_GEN_GRPC_VERSION='1.48.0'
 REACTIVE_GRPC_VERSION='1.2.3'
 SLF4J_VERSION='1.7.36'
-SPRING_BOOT_VERSION='2.7.1'
+SPRING_BOOT_VERSION='2.7.2'
 SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.5'
 SPOTIFY_FUTURES_EXTRA_VERSION='4.3.1'
 JAVAX_ANNOTATION_VERSION='1.3.2'
+HIBERNATE_VERSION='6.2.3.Final'
 
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <Armeria version> <Armeria working copy path>"
@@ -107,24 +108,27 @@ for E in $(find_examples); do
 
   # Append version numbers to the 3rd party dependencies.
   perl -i \
-    -pe "s/'com.google.protobuf:protobuf-java-util'/'com.google.protobuf:protobuf-java-util:$PROTOC_VERSION'/g;" \
-    -pe "s/'com.google.dagger:dagger'/'com.google.dagger:dagger:$DAGGER_VERSION'/g;" \
-    -pe "s/'com.google.dagger:dagger-producers'/'com.google.dagger:dagger-producers:$DAGGER_VERSION'/g;" \
-    -pe "s/'com.google.dagger:dagger-compiler'/'com.google.dagger:dagger-compiler:$DAGGER_VERSION'/g;" \
-    -pe "s/'com.salesforce.servicelibs:reactor-grpc-stub'/'com.salesforce.servicelibs:reactor-grpc-stub:$REACTIVE_GRPC_VERSION'/g;" \
-    -pe "s/'com.spotify:completable-futures'/'com.spotify:completable-futures:$SPOTIFY_COMPLETABLE_FUTURES_VERSION'/g;" \
-    -pe "s/'com.spotify:futures-extra'/'com.spotify:futures-extra:$SPOTIFY_FUTURES_EXTRA_VERSION'/g;" \
-    -pe "s/'io.dropwizard:dropwizard-testing'/'io.dropwizard:dropwizard-testing:$DROPWIZARD_VERSION'/g;" \
-    -pe "s/'io.projectreactor:reactor-core'/'io.projectreactor:reactor-core:$IO_PROJECTREACTOR_VERSION'/g;" \
-    -pe "s/'io.projectreactor:reactor-test'/'io.projectreactor:reactor-test:$IO_PROJECTREACTOR_VERSION'/g;" \
-    -pe "s/'javax.annotation:javax.annotation-api'/'javax.annotation:javax.annotation-api:$JAVAX_ANNOTATION_VERSION'/g;" \
-    -pe "s/'junit:junit'/'junit:junit:$JUNIT_VERSION'/g;" \
-    -pe "s/'net.javacrumbs.json-unit:json-unit-fluent'/'net.javacrumbs.json-unit:json-unit-fluent:$JSON_UNIT_VERSION'/g;" \
-    -pe "s/'org.assertj:assertj-core'/'org.assertj:assertj-core:$ASSERTJ_VERSION'/g;" \
-    -pe "s/'org.awaitility:awaitility'/'org.awaitility:awaitility:$AWAITILITY_VERSION'/g;" \
-    -pe "s/'org.slf4j:slf4j-simple'/'org.slf4j:slf4j-simple:$SLF4J_VERSION'/g;" \
-    -pe "s/'org.springframework.boot:spring-boot-configuration-processor'/'org.springframework.boot:spring-boot-configuration-processor:$SPRING_BOOT_VERSION'/g;" \
-    -pe "s/'org.springframework.boot:spring-boot-starter-test'/'org.springframework.boot:spring-boot-starter-test:$SPRING_BOOT_VERSION'/g;" \
+    -pe "s/libs.protobuf.java.util/'com.google.protobuf:protobuf-java-util:$PROTOC_VERSION'/g;" \
+    -pe "s/libs.dagger.producers/'com.google.dagger:dagger-producers:$DAGGER_VERSION'/g;" \
+    -pe "s/libs.dagger.compiler/'com.google.dagger:dagger-compiler:$DAGGER_VERSION'/g;" \
+    -pe "s/libs.dagger/'com.google.dagger:dagger:$DAGGER_VERSION'/g;" \
+    -pe "s/libs.reactor.grpc.stub/'com.salesforce.servicelibs:reactor-grpc-stub:$REACTIVE_GRPC_VERSION'/g;" \
+    -pe "s/libs.futures.completable/'com.spotify:completable-futures:$SPOTIFY_COMPLETABLE_FUTURES_VERSION'/g;" \
+    -pe "s/libs.futures.extra/'com.spotify:futures-extra:$SPOTIFY_FUTURES_EXTRA_VERSION'/g;" \
+    -pe "s/libs.dropwizard2.testing/'io.dropwizard:dropwizard-testing:$DROPWIZARD_VERSION'/g;" \
+    -pe "s/libs.reactor.core/'io.projectreactor:reactor-core:$IO_PROJECTREACTOR_VERSION'/g;" \
+    -pe "s/libs.reactor.test/'io.projectreactor:reactor-test:$IO_PROJECTREACTOR_VERSION'/g;" \
+    -pe "s/libs.javax.annotation/'javax.annotation:javax.annotation-api:$JAVAX_ANNOTATION_VERSION'/g;" \
+    -pe "s/libs.junit4/'junit:junit:$JUNIT_VERSION'/g;" \
+    -pe "s/libs.junit5.jupiter.api/'org.junit.jupiter:junit-jupiter-api'/g;" \
+    -pe "s/libs.json.unit.fluent/'net.javacrumbs.json-unit:json-unit-fluent:$JSON_UNIT_VERSION'/g;" \
+    -pe "s/libs.assertj/'org.assertj:assertj-core:$ASSERTJ_VERSION'/g;" \
+    -pe "s/libs.awaitility/'org.awaitility:awaitility:$AWAITILITY_VERSION'/g;" \
+    -pe "s/libs.slf4j.simple/'org.slf4j:slf4j-simple:$SLF4J_VERSION'/g;" \
+    -pe "s/libs.spring.boot2.configuration.processor/'org.springframework.boot:spring-boot-configuration-processor:$SPRING_BOOT_VERSION'/g;" \
+    -pe "s/libs.spring.boot2.starter.test/'org.springframework.boot:spring-boot-starter-test:$SPRING_BOOT_VERSION'/g;" \
+    -pe "s/libs.spring.boot2.starter.web/'org.springframework.boot:spring-boot-starter-web:$SPRING_BOOT_VERSION'/g;" \
+    -pe "s/libs.hibernate.validator/'org.hibernate.validator:hibernate-validator:$HIBERNATE_VERSION'/g;" \
     "$TMPF"
 
   {
