@@ -14,10 +14,10 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micrometer:micrometer-bom:1.9.2'
-        mavenBom 'io.netty:netty-bom:4.1.79.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.18.0'
-        mavenBom 'org.junit:junit-bom:5.8.2'
+        mavenBom 'io.micrometer:micrometer-bom:1.9.4'
+        mavenBom 'io.netty:netty-bom:4.1.82.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.20.0'
+        mavenBom 'org.junit:junit-bom:5.9.1'
     }
 }
 
@@ -35,7 +35,7 @@ dependencies {
 
 dependencies {
     implementation 'com.linecorp.armeria:armeria'
-    implementation 'com.linecorp.armeria:armeria-thrift0.16'
+    implementation 'com.linecorp.armeria:armeria-thrift0.17'
     runtimeOnly 'org.slf4j:slf4j-simple:1.7.36'
 
     testImplementation 'com.linecorp.armeria:armeria-junit5'

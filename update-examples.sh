@@ -1,22 +1,22 @@
 #!/bin/bash -e
 ASSERTJ_VERSION='3.23.1'
 AWAITILITY_VERSION='4.2.0'
-DAGGER_VERSION='2.42'
+DAGGER_VERSION='2.44'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.11.RELEASE'
-DROPWIZARD_VERSION='2.1.0'
-IO_PROJECTREACTOR_VERSION='3.4.21'
+DROPWIZARD_VERSION='2.1.1'
+IO_PROJECTREACTOR_VERSION='3.4.23'
 JSON_UNIT_VERSION='2.35.0'
 JSR305_VERSION='3.0.2'
 JUNIT_VERSION='4.13.2'
-JUNIT_PLATFORM_VERSION='5.8.2'
-MICROMETER_VERSION='1.9.2'
-NETTY_VERSION='4.1.79.Final'
+JUNIT_PLATFORM_VERSION='5.9.1'
+MICROMETER_VERSION='1.9.4'
+NETTY_VERSION='4.1.82.Final'
 ORG_JRUYI_THRIFT="0.4.2"
 PROTOC_VERSION='3.21.1'
 PROTOC_GEN_GRPC_VERSION='1.48.0'
 REACTIVE_GRPC_VERSION='1.2.3'
 SLF4J_VERSION='1.7.36'
-SPRING_BOOT_VERSION='2.7.2'
+SPRING_BOOT_VERSION='2.7.4'
 SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.5'
 SPOTIFY_FUTURES_EXTRA_VERSION='4.3.1'
 JAVAX_ANNOTATION_VERSION='1.3.2'
@@ -100,7 +100,7 @@ for E in $(find_examples); do
     -pe "s/project\\(':spring:boot2-webflux-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot2-webflux-autoconfigure'/g;" \
     -pe "s/project\\(':spring:boot2-webflux-starter'\\)/'com.linecorp.armeria:armeria-spring-boot2-webflux-starter'/g;" \
     -pe "s/project\\(':tomcat9'\\)/'com.linecorp.armeria:armeria-tomcat9'/g;" \
-    -pe "s/project\\(':thrift0.16'\\)/'com.linecorp.armeria:armeria-thrift0.16'/g;" \
+    -pe "s/project\\(':thrift0.17'\\)/'com.linecorp.armeria:armeria-thrift0.17'/g;" \
     "$TMPF"
 
   # Remove the line that refers to `project(':annotation-processor')`.
@@ -132,7 +132,7 @@ for E in $(find_examples); do
     "$TMPF"
 
   {
-    if [[ "$E" == grpc* ]]; then
+    if [[ "$E" == *grpc* ]]; then
       echo 'buildscript {'
       echo '    dependencies {'
       echo "        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.12'"
@@ -168,7 +168,7 @@ for E in $(find_examples); do
     echo "apply plugin: 'java'"
     echo "apply plugin: 'eclipse'"
     echo "apply plugin: 'idea'"
-    if [[ "$E" == grpc* ]]; then
+    if [[ "$E" == *grpc* ]]; then
       echo "apply plugin: 'com.google.protobuf'"
     fi
     echo
@@ -190,7 +190,7 @@ for E in $(find_examples); do
     echo '}'
     echo
 
-    if [[ "$E" == grpc* ]]; then
+    if [[ "$E" == *grpc* ]]; then
       echo 'protobuf {'
       echo '    // Configure the protoc executable.'
       echo '    protoc {'
