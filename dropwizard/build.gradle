@@ -13,9 +13,9 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micrometer:micrometer-bom:1.9.4'
-        mavenBom 'io.netty:netty-bom:4.1.82.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.20.3'
+        mavenBom 'io.micrometer:micrometer-bom:1.10.2'
+        mavenBom 'io.netty:netty-bom:4.1.86.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.21.0'
         mavenBom 'org.junit:junit-bom:5.9.1'
     }
 }
@@ -39,7 +39,7 @@ application {
 dependencies {
     implementation 'com.linecorp.armeria:armeria-dropwizard2'
 
-    testImplementation 'io.dropwizard:dropwizard-testing:2.1.1'
+    testImplementation 'io.dropwizard:dropwizard-testing:2.1.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
 }
 
