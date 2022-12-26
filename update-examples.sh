@@ -151,7 +151,7 @@ for E in $(find_examples); do
       echo "    id 'application'"
     fi
 
-    if [[ "$E" == thrift* ]] || [[ "$E" == tutorials/thrift* ]]; then
+    if [[ "$E" == *thrift* ]]; then
       echo "    id \"org.jruyi.thrift\" version \"${ORG_JRUYI_THRIFT}\""
     fi
 
