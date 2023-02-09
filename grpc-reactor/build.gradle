@@ -21,8 +21,9 @@ dependencyManagement {
     imports {
         mavenBom 'io.micrometer:micrometer-bom:1.10.2'
         mavenBom 'io.netty:netty-bom:4.1.86.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.21.0'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.22.0'
         mavenBom 'org.junit:junit-bom:5.9.1'
+        mavenBom 'io.github.resilience4j:resilience4j-bom:2.0.2'
     }
 }
 
@@ -88,8 +89,8 @@ application {
 }
 
 tasks.withType(JavaCompile) {
-    sourceCompatibility = '11'
-    targetCompatibility = '11'
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
     options.encoding = 'UTF-8'
     options.debug = true
     options.compilerArgs += '-parameters'

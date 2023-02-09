@@ -34,17 +34,15 @@ dependencies {
 }
 
 dependencies {
-    implementation 'com.linecorp.armeria:armeria'
+    implementation 'com.linecorp.armeria:armeria-resilience4j2'
     implementation 'com.linecorp.armeria:armeria-spring-boot2-starter'
-    implementation 'com.linecorp.armeria:armeria-tomcat9'
-
-    implementation 'org.springframework.boot:spring-boot-starter-web:2.7.4'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.7.4'
-
     runtimeOnly 'com.linecorp.armeria:armeria-spring-boot2-actuator-starter'
+    implementation 'io.github.resilience4j:resilience4j-spring-boot2'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.7.4'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+    implementation 'io.prometheus:simpleclient_common:0.16.0'
+    implementation 'io.github.resilience4j:resilience4j-micrometer'
 
-    testImplementation 'org.assertj:assertj-core:3.23.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.4'
 }
 
