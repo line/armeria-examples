@@ -12,9 +12,11 @@ JUNIT_PLATFORM_VERSION='5.9.1'
 MICROMETER_VERSION='1.10.2'
 NETTY_VERSION='4.1.86.Final'
 ORG_JRUYI_THRIFT="0.4.2"
+PROMETHEUS_VERSION='0.16.0'
 PROTOC_VERSION='3.21.1'
 PROTOC_GEN_GRPC_VERSION='1.48.0'
 REACTIVE_GRPC_VERSION='1.2.3'
+RESILIENCE4J2_VERSION='2.0.2'
 SLF4J_VERSION='1.7.36'
 SPRING_BOOT_VERSION='2.7.4'
 SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.5'
@@ -92,6 +94,7 @@ for E in $(find_examples); do
     -pe "s/project\\(':junit5'\\)/'com.linecorp.armeria:armeria-junit5'/g;" \
     -pe "s/project\\(':logback'\\)/'com.linecorp.armeria:armeria-logback'/g;" \
     -pe "s/project\\(':reactor3'\\)/'com.linecorp.armeria:armeria-reactor3'/g;" \
+    -pe "s/project\\(':resilience4j2'\\)/'com.linecorp.armeria:armeria-resilience4j2'/g;" \
     -pe "s/project\\(':rxjava3'\\)/'com.linecorp.armeria:armeria-rxjava3'/g;" \
     -pe "s/project\\(':saml'\\)/'com.linecorp.armeria:armeria-saml'/g;" \
     -pe "s/project\\(':spring:boot2-actuator-starter'\\)/'com.linecorp.armeria:armeria-spring-boot2-actuator-starter'/g;" \
@@ -118,6 +121,10 @@ for E in $(find_examples); do
     -pe "s/libs.dropwizard2.testing/'io.dropwizard:dropwizard-testing:$DROPWIZARD_VERSION'/g;" \
     -pe "s/libs.reactor.core/'io.projectreactor:reactor-core:$IO_PROJECTREACTOR_VERSION'/g;" \
     -pe "s/libs.reactor.test/'io.projectreactor:reactor-test:$IO_PROJECTREACTOR_VERSION'/g;" \
+    -pe "s/libs.micrometer.prometheus/'io.micrometer:micrometer-registry-prometheus'/g;" \
+    -pe "s/libs.prometheus/'io.prometheus:simpleclient_common:$PROMETHEUS_VERSION'/g;" \
+    -pe "s/libs.resilience4j.springboot2/'io.github.resilience4j:resilience4j-spring-boot2'/g;" \
+    -pe "s/libs.resilience4j.micrometer/'io.github.resilience4j:resilience4j-micrometer'/g;" \
     -pe "s/libs.javax.annotation/'javax.annotation:javax.annotation-api:$JAVAX_ANNOTATION_VERSION'/g;" \
     -pe "s/libs.junit4/'junit:junit:$JUNIT_VERSION'/g;" \
     -pe "s/libs.junit5.jupiter.api/'org.junit.jupiter:junit-jupiter-api'/g;" \
@@ -186,6 +193,7 @@ for E in $(find_examples); do
     echo "        mavenBom 'io.netty:netty-bom:$NETTY_VERSION'"
     echo "        mavenBom 'com.linecorp.armeria:armeria-bom:$VERSION'"
     echo "        mavenBom 'org.junit:junit-bom:$JUNIT_PLATFORM_VERSION'"
+    echo "        mavenBom 'io.github.resilience4j:resilience4j-bom:$RESILIENCE4J2_VERSION'"
     echo '    }'
     echo '}'
     echo
@@ -250,8 +258,8 @@ for E in $(find_examples); do
 
     # Configure the Java compiler.
     echo 'tasks.withType(JavaCompile) {'
-    echo "    sourceCompatibility = '11'"
-    echo "    targetCompatibility = '11'"
+    echo "    sourceCompatibility = '17'"
+    echo "    targetCompatibility = '17'"
     echo "    options.encoding = 'UTF-8'"
     echo '    options.debug = true'
     echo "    options.compilerArgs += '-parameters'"
