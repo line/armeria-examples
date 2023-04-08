@@ -1,16 +1,16 @@
 #!/bin/bash -e
-ASSERTJ_VERSION='3.23.1'
+ASSERTJ_VERSION='3.24.2'
 AWAITILITY_VERSION='4.2.0'
 DAGGER_VERSION='2.44.2'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.11.RELEASE'
 DROPWIZARD_VERSION='2.1.4'
-IO_PROJECTREACTOR_VERSION='3.4.26'
-JSON_UNIT_VERSION='2.36.0'
+IO_PROJECTREACTOR_VERSION='3.5.1'
+JSON_UNIT_VERSION='2.37.0'
 JSR305_VERSION='3.0.2'
 JUNIT_VERSION='4.13.2'
-JUNIT_PLATFORM_VERSION='5.9.1'
-MICROMETER_VERSION='1.10.2'
-NETTY_VERSION='4.1.86.Final'
+JUNIT_PLATFORM_VERSION='5.9.2'
+MICROMETER_VERSION='1.10.5'
+NETTY_VERSION='4.1.91.Final'
 ORG_JRUYI_THRIFT="0.4.2"
 PROMETHEUS_VERSION='0.16.0'
 PROTOC_VERSION='3.21.1'
@@ -18,11 +18,12 @@ PROTOC_GEN_GRPC_VERSION='1.48.0'
 REACTIVE_GRPC_VERSION='1.2.3'
 RESILIENCE4J2_VERSION='2.0.2'
 SLF4J_VERSION='1.7.36'
-SPRING_BOOT_VERSION='2.7.4'
+SPRING_BOOT2_VERSION='2.7.10'
+SPRING_BOOT3_VERSION='3.0.5'
 SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.5'
 SPOTIFY_FUTURES_EXTRA_VERSION='4.3.1'
 JAVAX_ANNOTATION_VERSION='1.3.2'
-HIBERNATE_VERSION='6.2.3.Final'
+HIBERNATE_VERSION='8.0.0.Final'
 
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <Armeria version> <Armeria working copy path>"
@@ -98,11 +99,13 @@ for E in $(find_examples); do
     -pe "s/project\\(':rxjava3'\\)/'com.linecorp.armeria:armeria-rxjava3'/g;" \
     -pe "s/project\\(':saml'\\)/'com.linecorp.armeria:armeria-saml'/g;" \
     -pe "s/project\\(':spring:boot2-actuator-starter'\\)/'com.linecorp.armeria:armeria-spring-boot2-actuator-starter'/g;" \
-    -pe "s/project\\(':spring:boot2-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot2-autoconfigure'/g;" \
     -pe "s/project\\(':spring:boot2-starter'\\)/'com.linecorp.armeria:armeria-spring-boot2-starter'/g;" \
-    -pe "s/project\\(':spring:boot2-webflux-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot2-webflux-autoconfigure'/g;" \
-    -pe "s/project\\(':spring:boot2-webflux-starter'\\)/'com.linecorp.armeria:armeria-spring-boot2-webflux-starter'/g;" \
-    -pe "s/project\\(':tomcat9'\\)/'com.linecorp.armeria:armeria-tomcat9'/g;" \
+    -pe "s/project\\(':spring:boot3-actuator-starter'\\)/'com.linecorp.armeria:armeria-spring-boot3-actuator-starter'/g;" \
+    -pe "s/project\\(':spring:boot3-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot3-autoconfigure'/g;" \
+    -pe "s/project\\(':spring:boot3-starter'\\)/'com.linecorp.armeria:armeria-spring-boot3-starter'/g;" \
+    -pe "s/project\\(':spring:boot3-webflux-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot3-webflux-autoconfigure'/g;" \
+    -pe "s/project\\(':spring:boot3-webflux-starter'\\)/'com.linecorp.armeria:armeria-spring-boot3-webflux-starter'/g;" \
+    -pe "s/project\\(':tomcat10'\\)/'com.linecorp.armeria:armeria-tomcat10'/g;" \
     -pe "s/project\\(':thrift0.17'\\)/'com.linecorp.armeria:armeria-thrift0.17'/g;" \
     "$TMPF"
 
@@ -132,10 +135,12 @@ for E in $(find_examples); do
     -pe "s/libs.assertj/'org.assertj:assertj-core:$ASSERTJ_VERSION'/g;" \
     -pe "s/libs.awaitility/'org.awaitility:awaitility:$AWAITILITY_VERSION'/g;" \
     -pe "s/libs.slf4j.simple/'org.slf4j:slf4j-simple:$SLF4J_VERSION'/g;" \
-    -pe "s/libs.spring.boot2.configuration.processor/'org.springframework.boot:spring-boot-configuration-processor:$SPRING_BOOT_VERSION'/g;" \
-    -pe "s/libs.spring.boot2.starter.test/'org.springframework.boot:spring-boot-starter-test:$SPRING_BOOT_VERSION'/g;" \
-    -pe "s/libs.spring.boot2.starter.web/'org.springframework.boot:spring-boot-starter-web:$SPRING_BOOT_VERSION'/g;" \
-    -pe "s/libs.hibernate.validator/'org.hibernate.validator:hibernate-validator:$HIBERNATE_VERSION'/g;" \
+    -pe "s/libs.spring.boot2.starter.test/'org.springframework.boot:spring-boot-starter-test:$SPRING_BOOT2_VERSION'/g;" \
+    -pe "s/libs.spring.boot2.starter.web/'org.springframework.boot:spring-boot-starter-web:$SPRING_BOOT2_VERSION'/g;" \
+    -pe "s/libs.spring.boot3.configuration.processor/'org.springframework.boot:spring-boot-configuration-processor:$SPRING_BOOT3_VERSION'/g;" \
+    -pe "s/libs.spring.boot3.starter.test/'org.springframework.boot:spring-boot-starter-test:$SPRING_BOOT3_VERSION'/g;" \
+    -pe "s/libs.spring.boot3.starter.web/'org.springframework.boot:spring-boot-starter-web:$SPRING_BOOT3_VERSION'/g;" \
+    -pe "s/libs.hibernate.validator8/'org.hibernate.validator:hibernate-validator:$HIBERNATE_VERSION'/g;" \
     "$TMPF"
 
   {
@@ -151,14 +156,14 @@ for E in $(find_examples); do
     PLUGIN_VERSIONS=("$DEPENDENCY_MANAGEMENT_PLUGIN_VERSION")
     if grep -qF spring-boot "$TMPF"; then
       PLUGINS+=('org.springframework.boot')
-      PLUGIN_VERSIONS+=("$SPRING_BOOT_VERSION")
+      PLUGIN_VERSIONS+=("$SPRING_BOOT3_VERSION")
     fi
     echo 'plugins {'
     if grep -qF "id 'application'" "$TMPF"; then
       echo "    id 'application'"
     fi
 
-    if [[ "$E" == thrift* ]]; then
+    if [[ "$E" == *thrift* ]]; then
       echo "    id \"org.jruyi.thrift\" version \"${ORG_JRUYI_THRIFT}\""
     fi
 
