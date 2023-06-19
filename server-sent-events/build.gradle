@@ -1,6 +1,6 @@
 plugins {
     id 'application'
-    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+    id "io.spring.dependency-management" version "1.1.0"
 }
 
 apply plugin: 'java'
@@ -13,10 +13,10 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micrometer:micrometer-bom:1.10.5'
-        mavenBom 'io.netty:netty-bom:4.1.91.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.23.1'
-        mavenBom 'org.junit:junit-bom:5.9.2'
+        mavenBom 'io.micrometer:micrometer-bom:1.11.1'
+        mavenBom 'io.netty:netty-bom:4.1.93.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.24.0'
+        mavenBom 'org.junit:junit-bom:5.9.3'
         mavenBom 'io.github.resilience4j:resilience4j-bom:2.0.2'
     }
 }
@@ -35,11 +35,11 @@ dependencies {
 
 dependencies {
     implementation 'com.linecorp.armeria:armeria'
-    implementation 'io.projectreactor:reactor-core:3.5.1'
+    implementation 'io.projectreactor:reactor-core:3.5.7'
     runtimeOnly 'org.slf4j:slf4j-simple:1.7.36'
 
     testImplementation 'com.linecorp.armeria:armeria-junit5'
-    testImplementation 'io.projectreactor:reactor-test:3.5.1'
+    testImplementation 'io.projectreactor:reactor-test:3.5.7'
     testImplementation 'net.javacrumbs.json-unit:json-unit-fluent:2.37.0'
     testImplementation 'org.assertj:assertj-core:3.24.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api'

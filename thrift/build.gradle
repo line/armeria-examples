@@ -1,7 +1,7 @@
 plugins {
     id 'application'
     id "org.jruyi.thrift" version "0.4.2"
-    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+    id "io.spring.dependency-management" version "1.1.0"
 }
 
 apply plugin: 'java'
@@ -14,10 +14,10 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micrometer:micrometer-bom:1.10.5'
-        mavenBom 'io.netty:netty-bom:4.1.91.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.23.1'
-        mavenBom 'org.junit:junit-bom:5.9.2'
+        mavenBom 'io.micrometer:micrometer-bom:1.11.1'
+        mavenBom 'io.netty:netty-bom:4.1.93.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.24.0'
+        mavenBom 'org.junit:junit-bom:5.9.3'
         mavenBom 'io.github.resilience4j:resilience4j-bom:2.0.2'
     }
 }
@@ -36,7 +36,7 @@ dependencies {
 
 dependencies {
     implementation 'com.linecorp.armeria:armeria'
-    implementation 'com.linecorp.armeria:armeria-thrift0.17'
+    implementation 'com.linecorp.armeria:armeria-thrift0.18'
     runtimeOnly 'org.slf4j:slf4j-simple:1.7.36'
 
     testImplementation 'com.linecorp.armeria:armeria-junit5'

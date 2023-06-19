@@ -2,24 +2,28 @@
 ASSERTJ_VERSION='3.24.2'
 AWAITILITY_VERSION='4.2.0'
 DAGGER_VERSION='2.44.2'
-DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.0.11.RELEASE'
+DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.1.0'
 DROPWIZARD_VERSION='2.1.4'
-IO_PROJECTREACTOR_VERSION='3.5.1'
+# Upgrade Gradle version when 'org.jruyi.thrift' supports Gradle 8
+GRADLE_VERSION='7.6.1'
+IO_PROJECTREACTOR_VERSION='3.5.7'
 JSON_UNIT_VERSION='2.37.0'
 JSR305_VERSION='3.0.2'
 JUNIT_VERSION='4.13.2'
-JUNIT_PLATFORM_VERSION='5.9.2'
-MICROMETER_VERSION='1.10.5'
-NETTY_VERSION='4.1.91.Final'
+JUNIT_PLATFORM_VERSION='5.9.3'
+LOGBACK14='1.4.7'
+MICROMETER_VERSION='1.11.1'
+NETTY_VERSION='4.1.93.Final'
 ORG_JRUYI_THRIFT="0.4.2"
 PROMETHEUS_VERSION='0.16.0'
-PROTOC_VERSION='3.21.1'
-PROTOC_GEN_GRPC_VERSION='1.48.0'
-REACTIVE_GRPC_VERSION='1.2.3'
+PROTOC_VERSION='3.22.3'
+PROTOC_GEN_GRPC_VERSION='1.56.0'
+REACTIVE_GRPC_VERSION='1.2.4'
 RESILIENCE4J2_VERSION='2.0.2'
 SLF4J_VERSION='1.7.36'
+SLF4J2_VERSION='2.0.7'
 SPRING_BOOT2_VERSION='2.7.10'
-SPRING_BOOT3_VERSION='3.0.5'
+SPRING_BOOT3_VERSION='3.1.0'
 SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.5'
 SPOTIFY_FUTURES_EXTRA_VERSION='4.3.1'
 JAVAX_ANNOTATION_VERSION='1.3.2'
@@ -82,8 +86,8 @@ for E in $(find_examples); do
     print
   ' < "$E/build.gradle" > "$TMPF"
 
-  # Remove the 'apply plugin' statements.
-  perl -i -pe 's/^apply plugin:.*$//g' "$TMPF"
+  # Remove the 'alias ..' statements.
+  # perl -i -pe 's/^alias libs:.*$//g' "$TMPF"
 
   # Replace the 'project(...)' dependencies.
   perl -i \
@@ -93,6 +97,7 @@ for E in $(find_examples); do
     -pe "s/project\\(':graphql-protocol'\\)/'com.linecorp.armeria:armeria-graphql-protocol'/g;" \
     -pe "s/project\\(':grpc'\\)/'com.linecorp.armeria:armeria-grpc'/g;" \
     -pe "s/project\\(':junit5'\\)/'com.linecorp.armeria:armeria-junit5'/g;" \
+    -pe "s/project\\(':jetty11'\\)/'com.linecorp.armeria:armeria-jetty11'/g;" \
     -pe "s/project\\(':logback'\\)/'com.linecorp.armeria:armeria-logback'/g;" \
     -pe "s/project\\(':reactor3'\\)/'com.linecorp.armeria:armeria-reactor3'/g;" \
     -pe "s/project\\(':resilience4j2'\\)/'com.linecorp.armeria:armeria-resilience4j2'/g;" \
@@ -106,7 +111,7 @@ for E in $(find_examples); do
     -pe "s/project\\(':spring:boot3-webflux-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot3-webflux-autoconfigure'/g;" \
     -pe "s/project\\(':spring:boot3-webflux-starter'\\)/'com.linecorp.armeria:armeria-spring-boot3-webflux-starter'/g;" \
     -pe "s/project\\(':tomcat10'\\)/'com.linecorp.armeria:armeria-tomcat10'/g;" \
-    -pe "s/project\\(':thrift0.17'\\)/'com.linecorp.armeria:armeria-thrift0.17'/g;" \
+    -pe "s/project\\(':thrift0.18'\\)/'com.linecorp.armeria:armeria-thrift0.18'/g;" \
     "$TMPF"
 
   # Remove the line that refers to `project(':annotation-processor')`.
@@ -124,6 +129,7 @@ for E in $(find_examples); do
     -pe "s/libs.dropwizard2.testing/'io.dropwizard:dropwizard-testing:$DROPWIZARD_VERSION'/g;" \
     -pe "s/libs.reactor.core/'io.projectreactor:reactor-core:$IO_PROJECTREACTOR_VERSION'/g;" \
     -pe "s/libs.reactor.test/'io.projectreactor:reactor-test:$IO_PROJECTREACTOR_VERSION'/g;" \
+    -pe "s/libs.logback14/'ch.qos.logback:logback-classic:$LOGBACK14'/g;" \
     -pe "s/libs.micrometer.prometheus/'io.micrometer:micrometer-registry-prometheus'/g;" \
     -pe "s/libs.prometheus/'io.prometheus:simpleclient_common:$PROMETHEUS_VERSION'/g;" \
     -pe "s/libs.resilience4j.springboot2/'io.github.resilience4j:resilience4j-spring-boot2'/g;" \
@@ -135,9 +141,11 @@ for E in $(find_examples); do
     -pe "s/libs.assertj/'org.assertj:assertj-core:$ASSERTJ_VERSION'/g;" \
     -pe "s/libs.awaitility/'org.awaitility:awaitility:$AWAITILITY_VERSION'/g;" \
     -pe "s/libs.slf4j.simple/'org.slf4j:slf4j-simple:$SLF4J_VERSION'/g;" \
+    -pe "s/libs.slf4j2.api/'org.slf4j:slf4j-api:$SLF4J2_VERSION'/g;" \
     -pe "s/libs.spring.boot2.starter.test/'org.springframework.boot:spring-boot-starter-test:$SPRING_BOOT2_VERSION'/g;" \
     -pe "s/libs.spring.boot2.starter.web/'org.springframework.boot:spring-boot-starter-web:$SPRING_BOOT2_VERSION'/g;" \
     -pe "s/libs.spring.boot3.configuration.processor/'org.springframework.boot:spring-boot-configuration-processor:$SPRING_BOOT3_VERSION'/g;" \
+    -pe "s/libs.spring.boot3.starter.jetty/'org.springframework.boot:spring-boot-starter-jetty:$SPRING_BOOT3_VERSION'/g;" \
     -pe "s/libs.spring.boot3.starter.test/'org.springframework.boot:spring-boot-starter-test:$SPRING_BOOT3_VERSION'/g;" \
     -pe "s/libs.spring.boot3.starter.web/'org.springframework.boot:spring-boot-starter-web:$SPRING_BOOT3_VERSION'/g;" \
     -pe "s/libs.hibernate.validator8/'org.hibernate.validator:hibernate-validator:$HIBERNATE_VERSION'/g;" \
@@ -147,7 +155,7 @@ for E in $(find_examples); do
     if [[ "$E" == *grpc* ]]; then
       echo 'buildscript {'
       echo '    dependencies {'
-      echo "        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.12'"
+      echo "        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.9.3'"
       echo '    }'
       echo '}'
     fi
@@ -277,6 +285,12 @@ for E in $(find_examples); do
     echo '}'
     echo
   } > "$E/build.gradle"
+done
+
+# Update Gradle version
+for E in $(find_examples); do
+  perl -i -pe "s/distributionUrl=.*$/distributionUrl=https\:\/\/services.gradle.org\/distributions\/gradle-${GRADLE_VERSION}-all.zip/g" \
+    "$E/gradle/wrapper/gradle-wrapper.properties"
 done
 
 # Test all examples
