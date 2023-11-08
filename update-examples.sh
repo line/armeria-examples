@@ -162,9 +162,13 @@ for E in $(find_examples); do
     # Add the 'plugins' section.
     PLUGINS=('io.spring.dependency-management')
     PLUGIN_VERSIONS=("$DEPENDENCY_MANAGEMENT_PLUGIN_VERSION")
-    if grep -qF spring-boot "$TMPF"; then
+    if grep -qF spring-boot3 "$TMPF"; then
       PLUGINS+=('org.springframework.boot')
       PLUGIN_VERSIONS+=("$SPRING_BOOT3_VERSION")
+    elif grep -qF spring-boot2 "$TMPF"; then
+      PLUGINS+=('org.springframework.boot')
+      PLUGIN_VERSIONS+=("$SPRING_BOOT2_VERSION")
+
     fi
     echo 'plugins {'
     if grep -qF "id 'application'" "$TMPF"; then
