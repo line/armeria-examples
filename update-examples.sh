@@ -1,30 +1,29 @@
 #!/bin/bash -e
-ASSERTJ_VERSION='3.24.2'
+ASSERTJ_VERSION='3.25.2'
 AWAITILITY_VERSION='4.2.0'
-DAGGER_VERSION='2.48.1'
+DAGGER_VERSION='2.50'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.1.0'
-DROPWIZARD_VERSION='2.1.8'
-# Upgrade Gradle version when 'org.jruyi.thrift' supports Gradle 8
-GRADLE_VERSION='7.6.1'
-IO_PROJECTREACTOR_VERSION='3.5.11'
+DROPWIZARD_VERSION='2.1.10'
+GRADLE_VERSION='8.5'
+IO_PROJECTREACTOR_VERSION='3.6.2'
 JSON_UNIT_VERSION='2.38.0'
 JSR305_VERSION='3.0.2'
 JUNIT_VERSION='4.13.2'
-JUNIT_PLATFORM_VERSION='5.10.0'
-LOGBACK14='1.4.11'
-MICROMETER_VERSION='1.11.5'
-NETTY_VERSION='4.1.100.Final'
-ORG_JRUYI_THRIFT="0.4.2"
+JUNIT_PLATFORM_VERSION='5.10.1'
+LOGBACK14='1.4.14'
+MICROMETER_VERSION='1.12.2'
+NETTY_VERSION='4.1.106.Final'
+THRIFT_GRADLE_PLUGIN="0.5.0"
 PROMETHEUS_VERSION='0.16.0'
-PROTOC_VERSION='3.24.0'
-PROTOC_GEN_GRPC_VERSION='1.58.0'
+PROTOC_VERSION='3.25.1'
+PROTOC_GEN_GRPC_VERSION='1.61.0'
 REACTIVE_GRPC_VERSION='1.2.4'
-RESILIENCE4J2_VERSION='2.1.0'
+RESILIENCE4J2_VERSION='2.2.0'
 SLF4J_VERSION='1.7.36'
-SLF4J2_VERSION='2.0.7'
-SPRING_BOOT2_VERSION='2.7.16'
-SPRING_BOOT3_VERSION='3.1.4'
-SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.5'
+SLF4J2_VERSION='2.0.11'
+SPRING_BOOT2_VERSION='2.7.18'
+SPRING_BOOT3_VERSION='3.2.2'
+SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.6'
 SPOTIFY_FUTURES_EXTRA_VERSION='4.3.3'
 JAVAX_ANNOTATION_VERSION='1.3.2'
 HIBERNATE_VERSION='8.0.0.Final'
@@ -97,7 +96,7 @@ for E in $(find_examples); do
     -pe "s/project\\(':graphql-protocol'\\)/'com.linecorp.armeria:armeria-graphql-protocol'/g;" \
     -pe "s/project\\(':grpc'\\)/'com.linecorp.armeria:armeria-grpc'/g;" \
     -pe "s/project\\(':junit5'\\)/'com.linecorp.armeria:armeria-junit5'/g;" \
-    -pe "s/project\\(':jetty11'\\)/'com.linecorp.armeria:armeria-jetty11'/g;" \
+    -pe "s/project\\(':jetty12'\\)/'com.linecorp.armeria:armeria-jetty12'/g;" \
     -pe "s/project\\(':logback'\\)/'com.linecorp.armeria:armeria-logback'/g;" \
     -pe "s/project\\(':reactor3'\\)/'com.linecorp.armeria:armeria-reactor3'/g;" \
     -pe "s/project\\(':resilience4j2'\\)/'com.linecorp.armeria:armeria-resilience4j2'/g;" \
@@ -176,7 +175,7 @@ for E in $(find_examples); do
     fi
 
     if [[ "$E" == *thrift* ]]; then
-      echo "    id \"org.jruyi.thrift\" version \"${ORG_JRUYI_THRIFT}\""
+      echo "    id \"com.linecorp.thrift-gradle-plugin\" version \"${THRIFT_GRADLE_PLUGIN}\""
     fi
 
     for ((I=0; I<${#PLUGINS[@]}; I++)); do
