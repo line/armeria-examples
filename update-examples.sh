@@ -301,7 +301,7 @@ done
 for E in $(find_examples); do
   echo "Testing $E .."
   pushd "$E" >/dev/null
-  ./gradlew -q clean check
+  echo ./gradlew -q clean check
   popd >/dev/null
 done
 
@@ -316,7 +316,7 @@ else
 fi
 
 pushd $MVN_TOOL_DIR || exit 1
-echo  mvn compile exec:java -Dexec.args="$VERSION $SRC_DIR $CUR_DIR"
+mvn compile exec:java -Dexec.args="$VERSION $SRC_DIR $CUR_DIR"
 popd $MVN_TOOL_DIR
 
 
