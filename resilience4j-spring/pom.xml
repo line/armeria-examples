@@ -14,7 +14,7 @@
     <dependency> 
       <groupId>com.linecorp.armeria</groupId>  
       <artifactId>armeria-resilience4j2</artifactId>  
-      <version>1.27.0</version> 
+      <version>1.27.2</version> 
     </dependency>  
     <dependency> 
       <groupId>io.github.resilience4j</groupId>  
@@ -29,7 +29,7 @@
     <dependency> 
       <groupId>com.linecorp.armeria</groupId>  
       <artifactId>armeria-spring-boot2-actuator-starter</artifactId>  
-      <version>1.27.0</version>  
+      <version>1.27.2</version>  
       <scope>runtime</scope> 
     </dependency>  
     <dependency> 
@@ -51,7 +51,7 @@
     <dependency> 
       <groupId>com.linecorp.armeria</groupId>  
       <artifactId>armeria-spring-boot2-starter</artifactId>  
-      <version>1.27.0</version> 
+      <version>1.27.2</version> 
     </dependency>  
     <dependency> 
       <groupId>io.micrometer</groupId>  

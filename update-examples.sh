@@ -300,7 +300,7 @@ done
 for E in $(find_examples); do
   echo "Testing $E .."
   pushd "$E" >/dev/null
-  echo ./gradlew -q clean check
+  ./gradlew -q clean check
   popd >/dev/null
 done
 

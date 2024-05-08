@@ -14,7 +14,7 @@
     <dependency> 
       <groupId>com.linecorp.armeria</groupId>  
       <artifactId>armeria-graphql</artifactId>  
-      <version>1.27.0</version> 
+      <version>1.27.2</version> 
     </dependency>  
     <dependency> 
       <groupId>org.slf4j</groupId>  
@@ -25,12 +25,12 @@
     <dependency> 
       <groupId>com.linecorp.armeria</groupId>  
       <artifactId>armeria-graphql-protocol</artifactId>  
-      <version>1.27.0</version> 
+      <version>1.27.2</version> 
     </dependency>  
     <dependency> 
       <groupId>com.linecorp.armeria</groupId>  
       <artifactId>armeria-junit5</artifactId>  
-      <version>1.27.0</version>  
+      <version>1.27.2</version>  
       <scope>test</scope> 
     </dependency>  
     <dependency> 

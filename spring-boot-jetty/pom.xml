@@ -14,7 +14,7 @@
     <dependency> 
       <groupId>com.linecorp.armeria</groupId>  
       <artifactId>armeria-spring-boot3-starter</artifactId>  
-      <version>1.27.0</version> 
+      <version>1.27.2</version> 
     </dependency>  
     <dependency> 
       <groupId>org.springframework.boot</groupId>  
@@ -29,7 +29,7 @@
     <dependency> 
       <groupId>com.linecorp.armeria</groupId>  
       <artifactId>armeria</artifactId>  
-      <version>1.27.0</version> 
+      <version>1.27.2</version> 
     </dependency>  
     <dependency> 
       <groupId>org.assertj</groupId>  
@@ -63,13 +63,13 @@
     <dependency> 
       <groupId>com.linecorp.armeria</groupId>  
       <artifactId>armeria-spring-boot3-actuator-starter</artifactId>  
-      <version>1.27.0</version>  
+      <version>1.27.2</version>  
       <scope>runtime</scope> 
     </dependency>  
     <dependency> 
       <groupId>com.linecorp.armeria</groupId>  
       <artifactId>armeria-jetty12</artifactId>  
-      <version>1.27.0</version> 
+      <version>1.27.2</version> 
     </dependency>  
     <dependency> 
       <groupId>org.springframework.boot</groupId>  
@@ -81,6 +81,11 @@
           <artifactId>spring-boot-starter-tomcat</artifactId> 
         </exclusion> 
       </exclusions> 
+    </dependency>  
+    <dependency> 
+      <groupId>org.eclipse.jetty</groupId>  
+      <artifactId>jetty-server</artifactId>  
+      <version>12.0.7</version>
     </dependency> 
   </dependencies>  
   <build> 

@@ -14,7 +14,7 @@
     <dependency> 
       <groupId>com.linecorp.armeria</groupId>  
       <artifactId>armeria-dropwizard2</artifactId>  
-      <version>1.27.0</version> 
+      <version>1.27.2</version> 
     </dependency>  
     <dependency> 
       <groupId>io.dropwizard</groupId>  
@@ -32,6 +32,18 @@
       <groupId>org.assertj</groupId>  
       <artifactId>assertj-core</artifactId>  
       <version>3.25.3</version>  
+      <scope>test</scope> 
+    </dependency>  
+    <dependency> 
+      <groupId>org.junit.jupiter</groupId>  
+      <artifactId>junit-jupiter</artifactId>  
+      <version>5.10.2</version>  
+      <scope>test</scope> 
+    </dependency>  
+    <dependency> 
+      <groupId>org.junit.jupiter</groupId>  
+      <artifactId>junit-jupiter</artifactId>  
+      <version>5.10.2</version>  
       <scope>test</scope> 
     </dependency> 
   </dependencies>  
