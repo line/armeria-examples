@@ -1,6 +1,5 @@
 #!/bin/bash -e
 
-
 function generate_maven_pom_xml() {
     local VERSION=$1
     local SRC_DIR=$2
@@ -23,3 +22,6 @@ function generate_maven_pom_xml() {
 
 CUR_DIR=$(pwd)
 generate_maven_pom_xml "$VERSION" "$SRC_DIR" "$CUR_DIR"
+
+echo 'Testing examples by ./mvnw clean verify ...'
+./mvnw clean verify
