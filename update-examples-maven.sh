@@ -10,7 +10,7 @@ function generate_maven_pom_xml() {
     local MVN_TOOL_DIR=".mvn/armeria-tom4j"
     pushd $MVN_TOOL_DIR || exit 1
     mvn clean compile exec:java -Dexec.args="$VERSION $SRC_DIR $CUR_DIR"
-    popd $MVN_TOOL_DIR
+    popd
 }
 
 CUR_DIR=$(pwd)
