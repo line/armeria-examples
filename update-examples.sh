@@ -1,28 +1,27 @@
 #!/bin/bash -e
-ASSERTJ_VERSION='3.25.2'
-AWAITILITY_VERSION='4.2.0'
-DAGGER_VERSION='2.50'
+ASSERTJ_VERSION='3.25.3'
+AWAITILITY_VERSION='4.2.1'
+DAGGER_VERSION='2.51.1'
 DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.1.0'
-DROPWIZARD_VERSION='2.1.10'
+DROPWIZARD_VERSION='2.1.12'
 GRADLE_VERSION='8.5'
-IO_PROJECTREACTOR_VERSION='3.6.2'
+IO_PROJECTREACTOR_VERSION='3.6.6'
 JSON_UNIT_VERSION='2.38.0'
 JSR305_VERSION='3.0.2'
 JUNIT_VERSION='4.13.2'
-JUNIT_PLATFORM_VERSION='5.10.1'
+JUNIT_PLATFORM_VERSION='5.10.2'
 LOGBACK14='1.4.14'
-MICROMETER_VERSION='1.12.2'
-NETTY_VERSION='4.1.106.Final'
+MICROMETER_VERSION='1.13.0'
+NETTY_VERSION='4.1.110.Final'
 THRIFT_GRADLE_PLUGIN="0.5.0"
-PROMETHEUS_VERSION='0.16.0'
 PROTOC_VERSION='3.25.1'
-PROTOC_GEN_GRPC_VERSION='1.61.0'
+PROTOC_GEN_GRPC_VERSION='1.64.0'
 REACTIVE_GRPC_VERSION='1.2.4'
 RESILIENCE4J2_VERSION='2.2.0'
 SLF4J_VERSION='1.7.36'
-SLF4J2_VERSION='2.0.11'
+SLF4J2_VERSION='2.0.12'
 SPRING_BOOT2_VERSION='2.7.18'
-SPRING_BOOT3_VERSION='3.2.2'
+SPRING_BOOT3_VERSION='3.3.0'
 SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.6'
 SPOTIFY_FUTURES_EXTRA_VERSION='4.3.3'
 JAVAX_ANNOTATION_VERSION='1.3.2'
@@ -98,6 +97,7 @@ for E in $(find_examples); do
     -pe "s/project\\(':junit5'\\)/'com.linecorp.armeria:armeria-junit5'/g;" \
     -pe "s/project\\(':jetty12'\\)/'com.linecorp.armeria:armeria-jetty12'/g;" \
     -pe "s/project\\(':logback'\\)/'com.linecorp.armeria:armeria-logback'/g;" \
+    -pe "s/project\\(':prometheus1'\\)/'com.linecorp.armeria:armeria-prometheus1'/g;" \
     -pe "s/project\\(':reactor3'\\)/'com.linecorp.armeria:armeria-reactor3'/g;" \
     -pe "s/project\\(':resilience4j2'\\)/'com.linecorp.armeria:armeria-resilience4j2'/g;" \
     -pe "s/project\\(':rxjava3'\\)/'com.linecorp.armeria:armeria-rxjava3'/g;" \
@@ -130,7 +130,6 @@ for E in $(find_examples); do
     -pe "s/libs.reactor.test/'io.projectreactor:reactor-test:$IO_PROJECTREACTOR_VERSION'/g;" \
     -pe "s/libs.logback14/'ch.qos.logback:logback-classic:$LOGBACK14'/g;" \
     -pe "s/libs.micrometer.prometheus/'io.micrometer:micrometer-registry-prometheus'/g;" \
-    -pe "s/libs.prometheus/'io.prometheus:simpleclient_common:$PROMETHEUS_VERSION'/g;" \
     -pe "s/libs.resilience4j.springboot2/'io.github.resilience4j:resilience4j-spring-boot2'/g;" \
     -pe "s/libs.resilience4j.micrometer/'io.github.resilience4j:resilience4j-micrometer'/g;" \
     -pe "s/libs.javax.annotation/'javax.annotation:javax.annotation-api:$JAVAX_ANNOTATION_VERSION'/g;" \
