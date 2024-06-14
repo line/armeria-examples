@@ -303,4 +303,6 @@ for E in $(find_examples); do
   popd >/dev/null
 done
 
+. update-examples-maven.sh
+
 echo "Successfully updated the examples for Armeria $VERSION"

@@ -1,0 +1,20 @@
+<plugin>
+  <groupId>org.xolstice.maven.plugins</groupId>
+  <artifactId>protobuf-maven-plugin</artifactId>
+  <version>0.6.1</version>
+  <configuration>
+    <protocArtifact>com.google.protobuf:protoc:${dep.protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
+    <pluginId>scala</pluginId>
+    <pluginArtifact>com.thesamet.scalapb:protoc-gen-scala:0.11.15:sh:unix</pluginArtifact>
+  </configuration>
+  <executions>
+    <execution>
+      <id>gen-grpc</id>
+      <goals>
+        <goal>compile</goal>
+        <goal>compile-custom</goal>
+      </goals>
+      <phase>generate-resources</phase>
+    </execution>
+  </executions>
+</plugin>

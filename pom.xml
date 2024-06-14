@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.linecorp.armeria</groupId>
+  <artifactId>examples</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+    <module>annotated-http-service</module>
+    <module>context-propagation/dagger</module>
+    <module>context-propagation/manual</module>
+    <module>context-propagation/reactor</module>
+    <module>context-propagation/rxjava</module>
+    <module>dropwizard</module>
+    <module>graphql</module>
+    <module>grpc-reactor</module>
+    <module>grpc</module>
+    <module>proxy-server</module>
+    <module>resilience4j-spring</module>
+    <module>saml-service-provider</module>
+    <module>server-sent-events</module>
+    <module>spring-boot-jetty</module>
+    <module>spring-boot-minimal</module>
+    <module>spring-boot-tomcat</module>
+    <module>spring-boot-webflux</module>
+    <module>static-files</module>
+    <module>thrift</module>
+    <module>tutorials/grpc</module>
+    <module>tutorials/rest-api-annotated-service</module>
+    <module>tutorials/thrift</module>
+  </modules>
+  <properties>
+    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+</project>
