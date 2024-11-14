@@ -21,7 +21,7 @@ dependencyManagement {
     imports {
         mavenBom 'io.micrometer:micrometer-bom:1.13.0'
         mavenBom 'io.netty:netty-bom:4.1.110.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.29.0'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.31.0'
         mavenBom 'org.junit:junit-bom:5.10.2'
         mavenBom 'io.github.resilience4j:resilience4j-bom:2.2.0'
     }

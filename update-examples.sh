@@ -24,6 +24,7 @@ SPRING_BOOT2_VERSION='2.7.18'
 SPRING_BOOT3_VERSION='3.3.0'
 SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.6'
 SPOTIFY_FUTURES_EXTRA_VERSION='4.3.3'
+TESTCONTAINERS_VERSION='1.20.3'
 JAVAX_ANNOTATION_VERSION='1.3.2'
 HIBERNATE_VERSION='8.0.0.Final'
 
@@ -147,6 +148,7 @@ for E in $(find_examples); do
     -pe "s/libs.spring.boot3.starter.test/'org.springframework.boot:spring-boot-starter-test:$SPRING_BOOT3_VERSION'/g;" \
     -pe "s/libs.spring.boot3.starter.web/'org.springframework.boot:spring-boot-starter-web:$SPRING_BOOT3_VERSION'/g;" \
     -pe "s/libs.hibernate.validator8/'org.hibernate.validator:hibernate-validator:$HIBERNATE_VERSION'/g;" \
+    -pe "s/libs.testcontainers.junit.jupiter/'org.testcontainers:junit-jupiter:$TESTCONTAINERS_VERSION'/g;" \
     "$TMPF"
 
   {
