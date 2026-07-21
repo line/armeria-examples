@@ -1,6 +1,6 @@
 plugins {
-    id "io.spring.dependency-management" version "1.1.0"
-    id "org.springframework.boot" version "3.3.0"
+    id "io.spring.dependency-management" version "1.1.7"
+    id "org.springframework.boot" version "4.0.6"
 }
 
 apply plugin: 'java'
@@ -13,39 +13,38 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micrometer:micrometer-bom:1.13.0'
-        mavenBom 'io.netty:netty-bom:4.1.110.Final'
-        mavenBom 'com.linecorp.armeria:armeria-bom:1.31.0'
-        mavenBom 'org.junit:junit-bom:5.10.2'
-        mavenBom 'io.github.resilience4j:resilience4j-bom:2.2.0'
+        mavenBom 'io.micrometer:micrometer-bom:1.17.0'
+        mavenBom 'io.netty:netty-bom:4.2.15.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.40.0'
+        mavenBom 'org.junit:junit-bom:6.0.3'
+        mavenBom 'io.github.resilience4j:resilience4j-bom:2.4.0'
     }
 }
 
 dependencies {
   implementation 'com.google.code.findbugs:jsr305:3.0.2'
-  testImplementation 'junit:junit:4.13.2'
-  testImplementation 'org.assertj:assertj-core:3.25.3'
+  testImplementation 'org.assertj:assertj-core:3.27.7'
   testImplementation 'org.junit.jupiter:junit-jupiter-api'
   testImplementation 'org.junit.jupiter:junit-jupiter-params'
   testRuntimeOnly 'org.junit.platform:junit-platform-commons'
   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-  testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'
 }
 
 dependencies {
     implementation 'com.linecorp.armeria:armeria'
-    implementation 'com.linecorp.armeria:armeria-spring-boot3-starter'
+    implementation 'com.linecorp.armeria:armeria-spring-boot4-starter'
     implementation 'com.linecorp.armeria:armeria-tomcat10'
 
-    implementation 'org.springframework.boot:spring-boot-starter-web:3.3.0'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:3.3.0'
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc:4.0.6'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:4.0.6'
 
-    runtimeOnly 'com.linecorp.armeria:armeria-spring-boot3-actuator-starter'
+    runtimeOnly 'com.linecorp.armeria:armeria-spring-boot4-actuator-starter'
 
-    testImplementation 'org.assertj:assertj-core:3.25.3'
+    testImplementation 'org.assertj:assertj-core:3.27.7'
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.3.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:4.0.6'
+    testImplementation 'org.springframework.boot:spring-boot-webmvc-test:4.0.6'
 }
 
 tasks.withType(JavaCompile) {
