@@ -1,32 +1,35 @@
 #!/bin/bash -e
-ASSERTJ_VERSION='3.25.3'
-AWAITILITY_VERSION='4.2.1'
-DAGGER_VERSION='2.51.1'
-DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.1.0'
+ASSERTJ_VERSION='3.27.7'
+ATHENZ_VERSION='1.12.42'
+AWAITILITY_VERSION='4.3.0'
+DAGGER_VERSION='2.59.2'
+DEPENDENCY_MANAGEMENT_PLUGIN_VERSION='1.1.7'
 DROPWIZARD_VERSION='2.1.12'
-GRADLE_VERSION='8.5'
-IO_PROJECTREACTOR_VERSION='3.6.6'
+GRADLE_VERSION='8.14.5'
+IO_PROJECTREACTOR_VERSION='3.8.6'
 JSON_UNIT_VERSION='2.38.0'
 JSR305_VERSION='3.0.2'
 JUNIT_VERSION='4.13.2'
-JUNIT_PLATFORM_VERSION='5.10.2'
+JUNIT5_VERSION='5.14.2'
+JUNIT6_VERSION='6.0.3'
 LOGBACK14='1.4.14'
-MICROMETER_VERSION='1.13.0'
-NETTY_VERSION='4.1.110.Final'
-THRIFT_GRADLE_PLUGIN="0.5.0"
-PROTOC_VERSION='3.25.1'
-PROTOC_GEN_GRPC_VERSION='1.64.0'
+MICROMETER_VERSION='1.17.0'
+NETTY_VERSION='4.2.15.Final'
+THRIFT_GRADLE_PLUGIN="0.6.1"
+PROTOC_VERSION='3.25.8'
+PROTOC_GEN_GRPC_VERSION='1.81.0'
+PROTOBUF_GRADLE_PLUGIN_VERSION='0.9.5'
 REACTIVE_GRPC_VERSION='1.2.4'
-RESILIENCE4J2_VERSION='2.2.0'
+RESILIENCE4J2_VERSION='2.4.0'
 SLF4J_VERSION='1.7.36'
-SLF4J2_VERSION='2.0.12'
-SPRING_BOOT2_VERSION='2.7.18'
-SPRING_BOOT3_VERSION='3.3.0'
+SLF4J2_VERSION='2.0.18'
+SPRING_BOOT3_VERSION='3.5.10'
+SPRING_BOOT4_VERSION='4.0.6'
 SPOTIFY_COMPLETABLE_FUTURES_VERSION='0.3.6'
 SPOTIFY_FUTURES_EXTRA_VERSION='4.3.3'
-TESTCONTAINERS_VERSION='1.20.3'
+TESTCONTAINERS_VERSION='2.0.5'
 JAVAX_ANNOTATION_VERSION='1.3.2'
-HIBERNATE_VERSION='8.0.0.Final'
+HIBERNATE_VERSION='8.0.3.Final'
 
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <Armeria version> <Armeria working copy path>"
@@ -56,7 +59,7 @@ cp -f "$SRC_DIR/examples/README.md" .
 
 function find_examples() {
   find "$SRC_DIR/examples" -mindepth 1 -maxdepth 2 -type d -print | while read -r D; do
-    if [[ -f "$D/build.gradle" && "$D" != *-scala && "$D" != *-sangria ]]; then
+    if [[ -f "$D/build.gradle" && "$D" != *-scala && "$D" != *-sangria && "$D" != */athenz ]]; then
       echo "${D##*/examples/}"
     fi
   done
@@ -103,6 +106,7 @@ for E in $(find_examples); do
     -pe "s/project\\(':resilience4j2'\\)/'com.linecorp.armeria:armeria-resilience4j2'/g;" \
     -pe "s/project\\(':rxjava3'\\)/'com.linecorp.armeria:armeria-rxjava3'/g;" \
     -pe "s/project\\(':saml'\\)/'com.linecorp.armeria:armeria-saml'/g;" \
+    -pe "s/project\\(':athenz'\\)/'com.linecorp.armeria:armeria-athenz'/g;" \
     -pe "s/project\\(':spring:boot2-actuator-starter'\\)/'com.linecorp.armeria:armeria-spring-boot2-actuator-starter'/g;" \
     -pe "s/project\\(':spring:boot2-starter'\\)/'com.linecorp.armeria:armeria-spring-boot2-starter'/g;" \
     -pe "s/project\\(':spring:boot3-actuator-starter'\\)/'com.linecorp.armeria:armeria-spring-boot3-actuator-starter'/g;" \
@@ -110,6 +114,9 @@ for E in $(find_examples); do
     -pe "s/project\\(':spring:boot3-starter'\\)/'com.linecorp.armeria:armeria-spring-boot3-starter'/g;" \
     -pe "s/project\\(':spring:boot3-webflux-autoconfigure'\\)/'com.linecorp.armeria:armeria-spring-boot3-webflux-autoconfigure'/g;" \
     -pe "s/project\\(':spring:boot3-webflux-starter'\\)/'com.linecorp.armeria:armeria-spring-boot3-webflux-starter'/g;" \
+    -pe "s/project\\(':spring:boot4-actuator-starter'\\)/'com.linecorp.armeria:armeria-spring-boot4-actuator-starter'/g;" \
+    -pe "s/project\\(':spring:boot4-starter'\\)/'com.linecorp.armeria:armeria-spring-boot4-starter'/g;" \
+    -pe "s/project\\(':spring:boot4-webflux-starter'\\)/'com.linecorp.armeria:armeria-spring-boot4-webflux-starter'/g;" \
     -pe "s/project\\(':tomcat10'\\)/'com.linecorp.armeria:armeria-tomcat10'/g;" \
     -pe "s/project\\(':thrift0.18'\\)/'com.linecorp.armeria:armeria-thrift0.18'/g;" \
     "$TMPF"
@@ -129,8 +136,9 @@ for E in $(find_examples); do
     -pe "s/libs.dropwizard2.testing/'io.dropwizard:dropwizard-testing:$DROPWIZARD_VERSION'/g;" \
     -pe "s/libs.reactor.core/'io.projectreactor:reactor-core:$IO_PROJECTREACTOR_VERSION'/g;" \
     -pe "s/libs.reactor.test/'io.projectreactor:reactor-test:$IO_PROJECTREACTOR_VERSION'/g;" \
-    -pe "s/libs.logback14/'ch.qos.logback:logback-classic:$LOGBACK14'/g;" \
+    -pe "s/libs.logback14/'ch.qos.logback:logback-classic'/g;" \
     -pe "s/libs.micrometer.prometheus/'io.micrometer:micrometer-registry-prometheus'/g;" \
+    -pe "s/libs.resilience4j.springboot4/'io.github.resilience4j:resilience4j-spring-boot4:$RESILIENCE4J2_VERSION'/g;" \
     -pe "s/libs.resilience4j.springboot2/'io.github.resilience4j:resilience4j-spring-boot2'/g;" \
     -pe "s/libs.resilience4j.micrometer/'io.github.resilience4j:resilience4j-micrometer'/g;" \
     -pe "s/libs.javax.annotation/'javax.annotation:javax.annotation-api:$JAVAX_ANNOTATION_VERSION'/g;" \
@@ -141,34 +149,45 @@ for E in $(find_examples); do
     -pe "s/libs.awaitility/'org.awaitility:awaitility:$AWAITILITY_VERSION'/g;" \
     -pe "s/libs.slf4j.simple/'org.slf4j:slf4j-simple:$SLF4J_VERSION'/g;" \
     -pe "s/libs.slf4j2.api/'org.slf4j:slf4j-api:$SLF4J2_VERSION'/g;" \
-    -pe "s/libs.spring.boot2.starter.test/'org.springframework.boot:spring-boot-starter-test:$SPRING_BOOT2_VERSION'/g;" \
-    -pe "s/libs.spring.boot2.starter.web/'org.springframework.boot:spring-boot-starter-web:$SPRING_BOOT2_VERSION'/g;" \
+    -pe "s/libs.spring.boot2.starter.test/'org.springframework.boot:spring-boot-starter-test'/g;" \
+    -pe "s/libs.spring.boot2.starter.web/'org.springframework.boot:spring-boot-starter-web'/g;" \
     -pe "s/libs.spring.boot3.configuration.processor/'org.springframework.boot:spring-boot-configuration-processor:$SPRING_BOOT3_VERSION'/g;" \
     -pe "s/libs.spring.boot3.starter.jetty/'org.springframework.boot:spring-boot-starter-jetty:$SPRING_BOOT3_VERSION'/g;" \
     -pe "s/libs.spring.boot3.starter.test/'org.springframework.boot:spring-boot-starter-test:$SPRING_BOOT3_VERSION'/g;" \
     -pe "s/libs.spring.boot3.starter.web/'org.springframework.boot:spring-boot-starter-web:$SPRING_BOOT3_VERSION'/g;" \
+    -pe "s/libs.spring.boot4.configuration.processor/'org.springframework.boot:spring-boot-configuration-processor:$SPRING_BOOT4_VERSION'/g;" \
+    -pe "s/libs.spring.boot4.starter.webmvc/'org.springframework.boot:spring-boot-starter-webmvc:$SPRING_BOOT4_VERSION'/g;" \
+    -pe "s/libs.spring.boot4.starter.test/'org.springframework.boot:spring-boot-starter-test:$SPRING_BOOT4_VERSION'/g;" \
+    -pe "s/libs.spring.boot4.validation/'org.springframework.boot:spring-boot-validation:$SPRING_BOOT4_VERSION'/g;" \
+    -pe "s/libs.spring.boot4.webflux.test/'org.springframework.boot:spring-boot-webflux-test:$SPRING_BOOT4_VERSION'/g;" \
+    -pe "s/libs.spring.boot4.webmvc.test/'org.springframework.boot:spring-boot-webmvc-test:$SPRING_BOOT4_VERSION'/g;" \
+    -pe "s/libs.athenz.zms.client/'com.yahoo.athenz:athenz-zms-java-client:$ATHENZ_VERSION'/g;" \
+    -pe "s/libs.athenz.zts.client/'com.yahoo.athenz:athenz-zts-java-client:$ATHENZ_VERSION'/g;" \
     -pe "s/libs.hibernate.validator8/'org.hibernate.validator:hibernate-validator:$HIBERNATE_VERSION'/g;" \
-    -pe "s/libs.testcontainers.junit.jupiter/'org.testcontainers:junit-jupiter:$TESTCONTAINERS_VERSION'/g;" \
+    -pe "s/libs.testcontainers.core/'org.testcontainers:testcontainers:$TESTCONTAINERS_VERSION'/g;" \
+    -pe "s/libs.testcontainers.junit.jupiter/'org.testcontainers:testcontainers-junit-jupiter:$TESTCONTAINERS_VERSION'/g;" \
     "$TMPF"
 
   {
     if [[ "$E" == *grpc* ]]; then
       echo 'buildscript {'
       echo '    dependencies {'
-      echo "        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.9.3'"
+      echo "        classpath 'com.google.protobuf:protobuf-gradle-plugin:$PROTOBUF_GRADLE_PLUGIN_VERSION'"
       echo '    }'
       echo '}'
     fi
     # Add the 'plugins' section.
     PLUGINS=('io.spring.dependency-management')
     PLUGIN_VERSIONS=("$DEPENDENCY_MANAGEMENT_PLUGIN_VERSION")
-    if grep -qF spring-boot3 "$TMPF"; then
+    SPRING_BOOT_MAJOR=""
+    if grep -qF spring-boot4 "$TMPF"; then
+      SPRING_BOOT_MAJOR="4"
+      PLUGINS+=('org.springframework.boot')
+      PLUGIN_VERSIONS+=("$SPRING_BOOT4_VERSION")
+    elif grep -qF spring-boot3 "$TMPF"; then
+      SPRING_BOOT_MAJOR="3"
       PLUGINS+=('org.springframework.boot')
       PLUGIN_VERSIONS+=("$SPRING_BOOT3_VERSION")
-    elif grep -qF spring-boot2 "$TMPF"; then
-      PLUGINS+=('org.springframework.boot')
-      PLUGIN_VERSIONS+=("$SPRING_BOOT2_VERSION")
-
     fi
     echo 'plugins {'
     if grep -qF "id 'application'" "$TMPF"; then
@@ -204,12 +223,17 @@ for E in $(find_examples); do
     echo
 
     # Import the BOM.
+    if [[ "$SPRING_BOOT_MAJOR" == "4" ]]; then
+      JUNIT_BOM_VERSION="$JUNIT6_VERSION"
+    else
+      JUNIT_BOM_VERSION="$JUNIT5_VERSION"
+    fi
     echo 'dependencyManagement {'
     echo '    imports {'
     echo "        mavenBom 'io.micrometer:micrometer-bom:$MICROMETER_VERSION'"
     echo "        mavenBom 'io.netty:netty-bom:$NETTY_VERSION'"
     echo "        mavenBom 'com.linecorp.armeria:armeria-bom:$VERSION'"
-    echo "        mavenBom 'org.junit:junit-bom:$JUNIT_PLATFORM_VERSION'"
+    echo "        mavenBom 'org.junit:junit-bom:$JUNIT_BOM_VERSION'"
     echo "        mavenBom 'io.github.resilience4j:resilience4j-bom:$RESILIENCE4J2_VERSION'"
     echo '    }'
     echo '}'
@@ -253,14 +277,18 @@ for E in $(find_examples); do
     # Add common dependencies
     echo 'dependencies {'
     echo "  implementation 'com.google.code.findbugs:jsr305:$JSR305_VERSION'"
-    echo "  testImplementation 'junit:junit:$JUNIT_VERSION'"
+    if [[ "$SPRING_BOOT_MAJOR" != "4" ]]; then
+      echo "  testImplementation 'junit:junit:$JUNIT_VERSION'"
+    fi
     echo "  testImplementation 'org.assertj:assertj-core:$ASSERTJ_VERSION'"
     echo "  testImplementation 'org.junit.jupiter:junit-jupiter-api'"
     echo "  testImplementation 'org.junit.jupiter:junit-jupiter-params'"
     echo "  testRuntimeOnly 'org.junit.platform:junit-platform-commons'"
     echo "  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'"
     echo "  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'"
-    echo "  testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'"
+    if [[ "$SPRING_BOOT_MAJOR" != "4" ]]; then
+      echo "  testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'"
+    fi
     echo '}'
     echo
 
