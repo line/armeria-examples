@@ -1,0 +1,17 @@
+plugins {
+    id 'application'
+}
+
+dependencies {
+    implementation project(':core')
+    runtimeOnly libs.slf4j.simple
+
+    testImplementation project(':junit5')
+    testImplementation libs.json.unit.fluent
+    testImplementation libs.assertj
+    testImplementation libs.junit5.jupiter.api
+}
+
+application {
+    mainClass.set('example.armeria.server.files.Main')
+}

@@ -1,0 +1,31 @@
+<plugin>
+  <groupId>org.xolstice.maven.plugins</groupId>
+  <artifactId>protobuf-maven-plugin</artifactId>
+  <version>0.6.1</version>
+  <configuration>
+    <protocArtifact>com.google.protobuf:protoc:${dep.protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
+    <pluginId>grpc-java</pluginId>
+    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${dep.grpc-java.version}:exe:${os.detected.classifier}</pluginArtifact>
+  </configuration>
+  <executions>
+    <execution>
+      <id>gen-grpc</id>
+      <goals>
+        <goal>compile</goal>
+        <goal>compile-custom</goal>
+      </goals>
+      <phase>generate-resources</phase>
+      <configuration>
+        <protocPlugins>
+          <protocPlugin>
+            <id>reactor-grpc</id>
+            <groupId>com.salesforce.servicelibs</groupId>
+            <artifactId>reactor-grpc</artifactId>
+            <version>1.2.4</version>
+            <mainClass>com.salesforce.reactorgrpc.ReactorGrpcGenerator</mainClass>
+          </protocPlugin>
+        </protocPlugins>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>

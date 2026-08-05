@@ -54,3 +54,6 @@ hs_err_pid*
 
 # macOS folder metadata
 .DS_Store
+
+
+target/
