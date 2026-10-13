@@ -1,0 +1,61 @@
+plugins {
+    id "io.spring.dependency-management" version "1.1.7"
+    id "org.springframework.boot" version "4.0.6"
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'io.micrometer:micrometer-bom:1.17.0'
+        mavenBom 'io.netty:netty-bom:4.2.15.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.42.0'
+        mavenBom 'org.junit:junit-bom:6.0.3'
+        mavenBom 'io.github.resilience4j:resilience4j-bom:2.4.0'
+    }
+}
+
+dependencies {
+  implementation 'com.google.code.findbugs:jsr305:3.0.2'
+  testImplementation 'org.assertj:assertj-core:3.27.7'
+  testImplementation 'org.junit.jupiter:junit-jupiter-api'
+  testImplementation 'org.junit.jupiter:junit-jupiter-params'
+  testRuntimeOnly 'org.junit.platform:junit-platform-commons'
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+dependencies {
+    implementation 'com.linecorp.armeria:armeria-spring-boot4-xds'
+    implementation 'org.springframework.cloud:spring-cloud-config-server:5.0.4'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:4.0.6'
+}
+
+tasks.register('runConfigServer', JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'example.springframework.boot.xds.cloudconfig.server.ConfigServerMain'
+}
+
+tasks.register('runClient', JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'example.springframework.boot.xds.cloudconfig.client.ClientMain'
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
+    options.encoding = 'UTF-8'
+    options.debug = true
+    options.compilerArgs += '-parameters'
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+}
+

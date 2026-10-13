@@ -1,0 +1,65 @@
+plugins {
+    id 'application'
+    id "io.spring.dependency-management" version "1.1.7"
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'io.micrometer:micrometer-bom:1.17.0'
+        mavenBom 'io.netty:netty-bom:4.2.15.Final'
+        mavenBom 'com.linecorp.armeria:armeria-bom:1.42.0'
+        mavenBom 'org.junit:junit-bom:5.14.2'
+        mavenBom 'io.github.resilience4j:resilience4j-bom:2.4.0'
+    }
+}
+
+dependencies {
+  implementation 'com.google.code.findbugs:jsr305:3.0.2'
+  testImplementation 'junit:junit:4.13.2'
+  testImplementation 'org.assertj:assertj-core:3.27.7'
+  testImplementation 'org.junit.jupiter:junit-jupiter-api'
+  testImplementation 'org.junit.jupiter:junit-jupiter-params'
+  testRuntimeOnly 'org.junit.platform:junit-platform-commons'
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+  testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'
+}
+
+dependencies {
+    implementation 'com.linecorp.armeria:armeria-xds'
+    implementation 'com.linecorp.armeria:armeria-prometheus1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.22.1'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.22.1'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+    implementation 'com.google.protobuf:protobuf-java-util:3.25.8'
+    runtimeOnly 'org.slf4j:slf4j-simple:1.7.36'
+
+    testImplementation 'com.linecorp.armeria:armeria-junit5'
+    testImplementation 'org.assertj:assertj-core:3.27.7'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+}
+
+application {
+    mainClass.set('example.armeria.xds.Main')
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
+    options.encoding = 'UTF-8'
+    options.debug = true
+    options.compilerArgs += '-parameters'
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+}
+

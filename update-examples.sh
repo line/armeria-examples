@@ -30,6 +30,8 @@ SPOTIFY_FUTURES_EXTRA_VERSION='4.3.3'
 TESTCONTAINERS_VERSION='2.0.5'
 JAVAX_ANNOTATION_VERSION='1.3.2'
 HIBERNATE_VERSION='8.0.3.Final'
+JACKSON_VERSION='2.22.1'
+SPRING_CLOUD_CONFIG_SERVER_VERSION='5.0.4'
 
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <Armeria version> <Armeria working copy path>"
@@ -118,6 +120,8 @@ for E in $(find_examples); do
     -pe "s/project\\(':spring:boot4-starter'\\)/'com.linecorp.armeria:armeria-spring-boot4-starter'/g;" \
     -pe "s/project\\(':spring:boot4-webflux-starter'\\)/'com.linecorp.armeria:armeria-spring-boot4-webflux-starter'/g;" \
     -pe "s/project\\(':tomcat10'\\)/'com.linecorp.armeria:armeria-tomcat10'/g;" \
+    -pe "s/project\\(':xds'\\)/'com.linecorp.armeria:armeria-xds'/g;" \
+    -pe "s/project\\(':spring:boot4-xds'\\)/'com.linecorp.armeria:armeria-spring-boot4-xds'/g;" \
     -pe "s/project\\(':thrift0.18'\\)/'com.linecorp.armeria:armeria-thrift0.18'/g;" \
     "$TMPF"
 
@@ -164,6 +168,9 @@ for E in $(find_examples); do
     -pe "s/libs.athenz.zms.client/'com.yahoo.athenz:athenz-zms-java-client:$ATHENZ_VERSION'/g;" \
     -pe "s/libs.athenz.zts.client/'com.yahoo.athenz:athenz-zts-java-client:$ATHENZ_VERSION'/g;" \
     -pe "s/libs.hibernate.validator8/'org.hibernate.validator:hibernate-validator:$HIBERNATE_VERSION'/g;" \
+    -pe "s/libs.jackson.databind/'com.fasterxml.jackson.core:jackson-databind:$JACKSON_VERSION'/g;" \
+    -pe "s/libs.jackson.dataformat.yaml/'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$JACKSON_VERSION'/g;" \
+    -pe "s/libs.spring.cloud.config.server/'org.springframework.cloud:spring-cloud-config-server:$SPRING_CLOUD_CONFIG_SERVER_VERSION'/g;" \
     -pe "s/libs.testcontainers.core/'org.testcontainers:testcontainers:$TESTCONTAINERS_VERSION'/g;" \
     -pe "s/libs.testcontainers.junit.jupiter/'org.testcontainers:testcontainers-junit-jupiter:$TESTCONTAINERS_VERSION'/g;" \
     "$TMPF"
